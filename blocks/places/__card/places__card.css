@@ -4,6 +4,6 @@
   background: #FFFFFF;
   border-radius: 10px;
   display: grid;
-  grid-template-columns: max-content min-content;
+  grid-template-columns: max-content 1fr;
   grid-template-rows: min-content min-content;
 }

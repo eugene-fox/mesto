@@ -12,3 +12,10 @@
   grid-template-columns: repeat(2, calc((100% - 18px) / 2));
   }
 }
+
+@media screen and (max-width: 524px) {
+  .places {
+  /* grid-template-columns: 282px; */
+  grid-template-columns: 100%;
+  }
+}

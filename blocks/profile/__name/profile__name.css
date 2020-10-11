@@ -7,8 +7,16 @@
   color: #FFFFFF;
   margin: 0 0 16px;
   padding: 0;
-  max-width: 500px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  max-width: 500px;
+}
+
+@media screen and (max-width: 524px) {
+  .profile__name {
+    font-size: 27px;
+    text-align: center;
+    margin-bottom: 14px;
+  }
 }

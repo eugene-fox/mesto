@@ -6,6 +6,8 @@
 
 @media screen and (max-width: 768px) {
   .places__photo {
-    max-width: 100%;
+    max-width: none;
+    width: 100%;
+    object-fit: fill;
   }
 }

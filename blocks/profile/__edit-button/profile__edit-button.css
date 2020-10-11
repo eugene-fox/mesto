@@ -2,15 +2,22 @@
   width: 24px;
   height: 24px;
   box-sizing: border-box;
-  margin: 37px 0 0;
+  margin: 37px 0 0 17px;
   padding: 0;
   border: 1px solid #FFFFFF;
   background: #000 url(../../../images/pen.svg) no-repeat left 50% top 50%;
   transition: .5s;
+  flex-shrink: 0;
 }
 
 .profile__edit-button:hover {
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  background: #000 url(../../../images/pen-grey.svg) no-repeat left 50% top 50%;
+  opacity: .6;
+}
+
+@media screen and (max-width: 524px) {
+  .profile__edit-button {
+    width: 18px;
+    height: 18px;
+  }
 }

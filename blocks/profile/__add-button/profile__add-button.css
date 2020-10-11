@@ -11,6 +11,13 @@
 
 .profile__add-button:hover {
   cursor: pointer;
-  border: 2px solid rgba(255, 255, 255, 0.6);
-  background-image: url(../../../images/plus-grey.svg);
+  opacity: .6;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__add-button {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+  }
 }
