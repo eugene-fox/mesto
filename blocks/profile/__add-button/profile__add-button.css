@@ -6,4 +6,11 @@
   border-radius: 2px;
   margin: 35px 0 0;
   background: #000 url(../../../images/plus.svg) no-repeat left 50% top 50%;
+  transition: .5s;
+}
+
+.profile__add-button:hover {
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  background-image: url(../../../images/plus-grey.svg);
 }

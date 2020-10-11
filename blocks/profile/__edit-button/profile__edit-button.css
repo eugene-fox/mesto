@@ -6,4 +6,11 @@
   padding: 0;
   border: 1px solid #FFFFFF;
   background: #000 url(../../../images/pen.svg) no-repeat left 50% top 50%;
+  transition: .5s;
+}
+
+.profile__edit-button:hover {
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: #000 url(../../../images/pen-grey.svg) no-repeat left 50% top 50%;
 }

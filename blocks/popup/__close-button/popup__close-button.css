@@ -1,0 +1,15 @@
+.popup__close-button {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: url(../../../images/close-icon.svg) no-repeat center/contain;
+  top: -33px;
+  right: -33px;
+  transition: .5s;
+}
+
+.popup__close-button:hover {
+  background: url(../../../images/close-icon-grey.svg) no-repeat center/contain;
+  cursor: pointer;
+  transform: rotate(90deg);
+}
