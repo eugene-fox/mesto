@@ -1,10 +1,10 @@
 .popup__close-button {
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 57px;
+  height: 57px;
   background: url(../../../images/close-icon.svg) no-repeat center/contain;
-  top: -33px;
-  right: -33px;
+  top: -45px;
+  right: -45px;
   transition: .5s;
 }
 
@@ -12,4 +12,13 @@
   background: url(../../../images/close-icon-grey.svg) no-repeat center/contain;
   cursor: pointer;
   transform: rotate(90deg);
+}
+
+@media screen and (max-width: 320px) {
+  .popup__close-button {
+    width: 37px;
+    height: 37px;
+    top: -52px;
+    right: -0px;
+  }
 }

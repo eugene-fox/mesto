@@ -2,12 +2,13 @@
   max-width: 282px;
   grid-column-start: 1;
   grid-column-end: 3;
+  object-fit: contain;
 }
 
 @media screen and (max-width: 768px) {
   .places__photo {
     max-width: none;
     width: 100%;
-    object-fit: fill;
+    /* object-fit: fill; */
   }
 }

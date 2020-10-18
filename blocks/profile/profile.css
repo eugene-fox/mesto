@@ -4,12 +4,5 @@
   min-height: 120px;
   margin: 0 auto 50px;
   padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
-@media screen and (max-width: 768px) {
-  .profile {
-    flex-direction: column;
-  }
+  box-sizing: border-box;
 }
