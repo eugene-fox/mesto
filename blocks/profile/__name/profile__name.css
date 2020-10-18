@@ -20,7 +20,7 @@
   .profile__name {
     font-size: 27px;
     text-align: center;
-    margin-bottom: 14px;
+    margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
   }
