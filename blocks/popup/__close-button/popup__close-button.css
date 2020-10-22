@@ -2,7 +2,7 @@
   position: absolute;
   width: 57px;
   height: 57px;
-  background: url(../../../images/close-icon.svg) no-repeat center/contain;
+  background: url("../../../images/close-icon.svg") no-repeat center/contain;
   top: -45px;
   right: -45px;
   transition: .5s;
@@ -10,7 +10,7 @@
 }
 
 .popup__close-button:hover {
-  background: url(../../../images/close-icon-grey.svg) no-repeat center/contain;
+  opacity: .6;
   cursor: pointer;
   transform: rotate(90deg);
 }

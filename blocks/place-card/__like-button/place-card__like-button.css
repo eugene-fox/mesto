@@ -1,7 +1,7 @@
 .place-card__like-button {
 width: 20px;
 height: 20px;
-background: #fff url(../../../images/heart.svg) no-repeat;
+background: #fff url("../../../images/heart.svg") no-repeat;
 background-size: contain;
 border: none;
 margin: 32px 18px 0 auto;

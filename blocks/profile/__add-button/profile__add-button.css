@@ -6,7 +6,7 @@
   border-radius: 2px;
   margin: 35px 0 auto;
   padding: 0;
-  background: #000 url(../../../images/plus.svg) no-repeat left 50% top 50%;
+  background: #000 url("../../../images/plus.svg") no-repeat left 50% top 50%;
   transition: opacity .5s;
   grid-area: Button;
   justify-self: end;

@@ -5,7 +5,7 @@
   margin: 37px 20px auto 0;
   padding: 0;
   border: 1px solid #FFFFFF;
-  background: #000 url(../../../images/pen.svg) no-repeat left 50% top 50%;
+  background: #000 url("../../../images/pen.svg") no-repeat left 50% top 50%;
   transition: .5s;
   flex-shrink: 0;
   grid-area: Edit;

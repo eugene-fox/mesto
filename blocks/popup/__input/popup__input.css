@@ -6,7 +6,7 @@
   padding: 0 0 10px 0;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  font-family: Inter;
+  font-family: "Inter", "Arial", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -15,11 +15,11 @@
   color: #000000;
 }
 
-.popup__input:first-of-type {
+.popup__input:first-child {
   margin-top: 50px;
 }
 
-.popup__input:last-of-type {
+.popup__input:last-child {
   margin-bottom: 48px;
 }
 

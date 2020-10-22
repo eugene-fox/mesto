@@ -21,8 +21,8 @@
         <img class="profile__avatar" src="./images/avatar.jpg" alt="Фотография Жака-Ива Кусто">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <p class="profile__description">Исследователь океана</p>
-        <button class="profile__edit-button"></button>
-        <button aria-label="Лайк" class="profile__add-button"></button>
+        <button type="button" class="profile__edit-button"></button>
+        <button type="button" aria-label="Лайк" class="profile__add-button"></button>
       </div>
     </section>
 
@@ -32,42 +32,42 @@
           <img class="place-card__photo" src="./images/places-card-photo-min01.jpg" alt="Фото Карачаевска">
           <div class="place-card__photo-description">
             <h2 class="place-card__photo-name">Карачаевск</h2>
-            <button aria-label="Лайк" class="place-card__like-button"></button>
+            <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
           </div>
         </li>
         <li class="place-card">
           <img class="place-card__photo" src="./images/places-card-photo-min02.jpg" alt="Фото Горы Эльбрус">
           <div class="place-card__photo-description">
             <h2 class="place-card__photo-name">Гора Эльбрус</h2>
-            <button aria-label="Лайк" class="place-card__like-button"></button>
+            <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
           </div>
         </li>
         <li class="place-card">
           <img class="place-card__photo" src="./images/places-card-photo-min03.jpg" alt="Фото Домбаев">
           <div class="place-card__photo-description">
             <h2 class="place-card__photo-name">Домбай</h2>
-            <button aria-label="Лайк" class="place-card__like-button"></button>
+            <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
           </div>
         </li>
         <li class="place-card">
           <img class="place-card__photo" src="./images/places-card-photo-min04.jpg" alt="Фото Байкала">
           <div class="place-card__photo-description">
             <h2 class="place-card__photo-name">Байкал</h2>
-            <button aria-label="Лайк" class="place-card__like-button"></button>
+            <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
           </div>
         </li>
         <li class="place-card">
           <img class="place-card__photo" src="./images/places-card-photo-min05.jpg" alt="Фото Ергаков">
           <div class="place-card__photo-description">
             <h2 class="place-card__photo-name">Ергаки</h2>
-            <button aria-label="Лайк" class="place-card__like-button"></button>
+            <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
           </div>
         </li>
         <li class="place-card">
           <img class="place-card__photo" src="./images/places-card-photo-min06.jpg" alt="Фото Хибин">
           <div class="place-card__photo-description">
             <h2 class="place-card__photo-name">Хибины</h2>
-            <button aria-label="Лайк" class="place-card__like-button"></button>
+            <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
           </div>
         </li>
       </ul>
@@ -82,10 +82,12 @@
   <section class="popup">
     <form name="profile-edit" class="popup__container">
       <h3 class="popup__title">Редактировать профиль</h3>
-      <input type="text" name="name-of-user" id="" class="popup__input" value="">
-      <input type="text" name="description" id="" class="popup__input" value="">
-      <button class="popup__save-button">Сохранить</button>
-      <button aria-label="Закрыть окно" class="popup__close-button"></button>
+      <div class="popup__inputs">
+        <input type="text" name="name-of-user" id="input-name" class="popup__input popup__input_type_name" value="" id="profile-name">
+        <input type="text" name="description" id="input-desc" class="popup__input popup__input_type_description" value="" id="profile-description">
+      </div>
+      <button type="submit" class="popup__save-button">Сохранить</button>
+      <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
     </form>
   </section>
 

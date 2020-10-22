@@ -16,7 +16,6 @@
 
 @media screen and (max-width: 620px) {
   .galery__places {
-  /* grid-template-columns: 282px; */
   grid-template-columns: 100%;
   }
 }
