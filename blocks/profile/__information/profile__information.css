@@ -5,7 +5,7 @@
   gap: 0px 0px;
   grid-template-areas:
     "Avatar Name Edit Button"
-    "Avatar Description Description Button"
+    "Avatar Description Description Button";
 }
 
 @media screen and (max-width: 820px) {
@@ -15,7 +15,7 @@
     grid-template-areas:
       "Avatar Name Edit "
       "Avatar Description Description"
-      "Button Button Button"
+      "Button Button Button";
   }
 }
 
@@ -27,6 +27,6 @@
       "Avatar Avatar Avatar"
       ". Name Edit"
       "Description Description Description"
-      "Button Button Button"
+      "Button Button Button";
   }
 }
