@@ -6,6 +6,7 @@
   top: -45px;
   right: -45px;
   transition: .5s;
+  border: 0;
 }
 
 .popup__close-button:hover {
@@ -14,7 +15,7 @@
   transform: rotate(90deg);
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 360px) {
   .popup__close-button {
     width: 37px;
     height: 37px;

@@ -2,8 +2,8 @@
   display: block;
   box-sizing: border-box;
   width: calc(100% - 72px);
-  margin: 30px 36px 30px 36px;
-  padding: 0 0 13px 0;
+  margin: 26px 36px 30px 36px;
+  padding: 0 0 10px 0;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   font-family: Inter;
@@ -16,7 +16,7 @@
 }
 
 .popup__input:first-of-type {
-  margin-top: 54px;
+  margin-top: 50px;
 }
 
 .popup__input:last-of-type {

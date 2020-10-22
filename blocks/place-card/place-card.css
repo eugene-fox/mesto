@@ -1,0 +1,7 @@
+.place-card {
+  overflow: hidden;
+  max-width: 282px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  justify-self: center;
+}

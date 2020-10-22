@@ -1,4 +1,4 @@
-.places {
+.galery__places {
   margin: 0;
   padding: 0;
   display: grid;
@@ -9,13 +9,13 @@
 }
 
 @media screen and (max-width: 920px) {
-  .places {
+  .galery__places {
   grid-template-columns: repeat(2, calc((100% - 18px) / 2));
   }
 }
 
 @media screen and (max-width: 620px) {
-  .places {
+  .galery__places {
   /* grid-template-columns: 282px; */
   grid-template-columns: 100%;
   }

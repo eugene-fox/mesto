@@ -1,4 +1,4 @@
-.places__photo-description {
+.place-card__photo-description {
   display: flex;
   flex-direction: row;
 }
