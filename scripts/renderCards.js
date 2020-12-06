@@ -36,6 +36,7 @@ function composeCard({
   const cardImage = newCard.querySelector('.place-card__photo');
   cardTitle.textContent = name;
   cardImage.src = link;
+  cardImage.alt = `Изображение на котором изображено место ${name}`;
   return newCard;
 }
 

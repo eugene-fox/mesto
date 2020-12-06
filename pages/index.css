@@ -21,6 +21,7 @@
 @import url("../blocks/galery/__places/galery__places.css");
 
 @import url("../blocks/place-card/place-card.css");
+@import url("../blocks/place-card/__delete-button/place-card__delete-button.css");
 @import url("../blocks/place-card/__like-button/place-card__like-button.css");
 @import url("../blocks/place-card/__photo-description/place-card__photo-description.css");
 @import url("../blocks/place-card/__photo-name/place-card__photo-name.css");
