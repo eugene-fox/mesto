@@ -28,7 +28,7 @@
 
     <section class="galery">
       <ul class="galery__places">
-        <li class="place-card">
+        <!-- <li class="place-card">
           <img class="place-card__photo" src="./images/places-card-photo-min01.jpg" alt="Фото Карачаевска">
           <div class="place-card__photo-description">
             <h2 class="place-card__photo-name">Карачаевск</h2>
@@ -69,7 +69,7 @@
             <h2 class="place-card__photo-name">Хибины</h2>
             <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
           </div>
-        </li>
+        </li> -->
       </ul>
     </section>
 
@@ -84,13 +84,25 @@
       <h3 class="popup__title">Редактировать профиль</h3>
       <div class="popup__inputs">
         <input type="text" name="name-of-user" id="input-name" class="popup__input popup__input_type_name" value="">
-        <input type="text" name="description" id="input-desc" class="popup__input popup__input_type_description" value="">
+        <input type="text" name="description" id="input-desc" class="popup__input popup__input_type_description"
+          value="">
       </div>
       <button type="submit" class="popup__save-button">Сохранить</button>
       <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
     </form>
   </section>
 
+  <template class="card-template">
+    <li class="place-card">
+      <img class="place-card__photo" src="" alt="">
+      <div class="place-card__photo-description">
+        <h2 class="place-card__photo-name"></h2>
+        <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
+      </div>
+    </li>
+  </template>
+
+  <script src="./scripts/renderCards.js"></script>
   <script src="./scripts/popup.js"></script>
 </body>
 

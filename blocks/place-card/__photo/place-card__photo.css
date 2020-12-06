@@ -1,13 +1,14 @@
 .place-card__photo {
-  max-width: 282px;
+  width: 282px;
+  height: 282px;
   grid-column-start: 1;
   grid-column-end: 3;
-  object-fit: contain;
+  object-fit: cover;
 }
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .place-card__photo {
     max-width: none;
     width: 100%;
   }
-}
+} */
