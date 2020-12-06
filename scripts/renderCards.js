@@ -37,7 +37,24 @@ function composeCard({
   cardTitle.textContent = name;
   cardImage.src = link;
   cardImage.alt = `Изображение на котором изображено место ${name}`;
+  addLikeAndDelete(newCard);
   return newCard;
+}
+
+function addLikeAndDelete(card) {
+  const deleteButton = card.querySelector('.place-card__delete-button');
+  deleteButton.addEventListener('click', deleteCard);
+  const likeButton = card.querySelector('.place-card__like-button');
+  likeButton.addEventListener('click', toggleLike);
+}
+
+function deleteCard(event) {
+  const targetCard = event.target.closest('.place-card');
+  targetCard.remove();
+}
+
+function toggleLike(event) {
+
 }
 
 function renderCards() {
