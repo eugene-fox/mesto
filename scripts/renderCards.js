@@ -56,7 +56,6 @@ function deleteCard(event) {
 
 //Функция активации/деактивации лайка
 function toggleLike(event) {
-  console.log(event);
   const likeItem = event.target;
   likeItem.classList.toggle('place-card__like-button_active');
 }
