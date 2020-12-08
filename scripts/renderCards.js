@@ -48,13 +48,17 @@ function addLikeAndDelete(card) {
   likeButton.addEventListener('click', toggleLike);
 }
 
+//Удаление карточки
 function deleteCard(event) {
   const targetCard = event.target.closest('.place-card');
   targetCard.remove();
 }
 
+//Функция активации/деактивации лайка
 function toggleLike(event) {
-
+  console.log(event);
+  const likeItem = event.target;
+  likeItem.classList.toggle('place-card__like-button_active');
 }
 
 function renderCards() {
