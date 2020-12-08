@@ -36,7 +36,28 @@ function composeCard({
   const cardImage = newCard.querySelector('.place-card__photo');
   cardTitle.textContent = name;
   cardImage.src = link;
+  cardImage.alt = `Изображение на котором изображено место ${name}`;
+  addLikeAndDelete(newCard);
   return newCard;
+}
+
+function addLikeAndDelete(card) {
+  const deleteButton = card.querySelector('.place-card__delete-button');
+  deleteButton.addEventListener('click', deleteCard);
+  const likeButton = card.querySelector('.place-card__like-button');
+  likeButton.addEventListener('click', toggleLike);
+}
+
+//Удаление карточки
+function deleteCard(event) {
+  const targetCard = event.target.closest('.place-card');
+  targetCard.remove();
+}
+
+//Функция активации/деактивации лайка
+function toggleLike(event) {
+  const likeItem = event.target;
+  likeItem.classList.toggle('place-card__like-button_active');
 }
 
 function renderCards() {
