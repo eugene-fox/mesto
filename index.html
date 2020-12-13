@@ -83,9 +83,8 @@
     <form name="profile-edit" class="popup__container">
       <h3 class="popup__title">Редактировать профиль</h3>
       <div class="popup__inputs">
-        <input type="text" name="name-of-user" id="input-name" class="popup__input popup__input_type_name" value="">
-        <input type="text" name="description" id="input-desc" class="popup__input popup__input_type_description"
-          value="">
+        <input type="text" name="name-of-user" class="popup__input popup__input_type_name" value="">
+        <input type="text" name="description" class="popup__input popup__input_type_description" value="">
       </div>
       <button type="submit" class="popup__save-button popup__save-button_profile">Сохранить</button>
       <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
@@ -96,17 +95,26 @@
     <form name="profile-edit" class="popup__container">
       <h3 class="popup__title">Новое место</h3>
       <div class="popup__inputs">
-        <input type="text" name="name-of-user" id="input-name" class="popup__input popup__input_type_place-name"
-          value="" placeholder="Название">
-        <input type="text" name="description" id="input-desc" class="popup__input popup__input_type_image-link"
-          value="" placeholder="Ссылка на картинку">
+        <input type="text" name="name-of-user" class="popup__input popup__input_type_place-name" value=""
+          placeholder="Название">
+        <input type="text" name="description" class="popup__input popup__input_type_image-link" value=""
+          placeholder="Ссылка на картинку">
       </div>
       <button type="submit" class="popup__save-button popup__save-button_card">Создать</button>
       <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
     </form>
   </section>
 
-
+  <section class="popup" id="fullSizeImage">
+    <div class="popup__image-container">
+      <figure class="popup__image-group">
+        <img class="popup__image" src="https://picsum.photos/800" alt="">
+        <figcaption class="popup__image-title">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
+          exercitationem officia fugiat eos iste corporis officiis</figcaption>
+      </figure>
+      <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
+    </div>
+  </section>
 
   <template class="card-template">
     <li class="place-card">
