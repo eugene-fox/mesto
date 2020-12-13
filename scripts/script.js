@@ -61,7 +61,7 @@ function composeCard({
   cardImage.src = link;
   cardImage.alt = `Изображение на котором изображено место ${name}`;
   addLikeDeleteView(newCard);
-  console.log(cardTitle.textContent, cardImage.src);
+  // console.log(cardTitle.textContent, cardImage.src);
   return newCard;
 }
 
@@ -152,6 +152,7 @@ const fullImageDesc = document.querySelector('.popup__image-title');
 //Функция открытие попапа с картинкой
 function openImagePopup(event) {
   fullImageUrl.src = event.target.src;
+  fullImageUrl.alt = event.target.alt;
   fullImageDesc.textContent = event.target.closest('.place-card').querySelector('.place-card__photo-name').textContent;
   addImagePopup.classList.add('popup_opened');
 }
