@@ -1,43 +1,27 @@
-const initialCards = [{
-    name: 'Random place',
-    link: 'https://picsum.photos/1920/1080?random=1'
-  },
-  {
-    name: 'Random place',
-    link: 'https://picsum.photos/1920/1080?random=2'
-  },
-  {
-    name: 'Random place',
-    link: 'https://picsum.photos/1920/1080?random=3'
-  },
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const cardsContainerElement = document.querySelector('.galery__places');
 const templateElement = document.querySelector('.card-template');
+
+const profileName = document.querySelector('.profile__name');
+const profileDescription = document.querySelector('.profile__description');
+
+const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
+
+const editPopup = document.getElementById('profileEdit');
+const addPopup = document.getElementById('addCard');
+const addImagePopup = document.getElementById('fullSizeImage');
+
+const nameInput = editPopup.querySelector('.popup__input_type_name');
+const jobInput = editPopup.querySelector('.popup__input_type_description');
+
+const placeName = document.querySelector('.popup__input_type_place-name');
+const placeImageUrl = document.querySelector('.popup__input_type_image-link');
+
+const popupCloseButtons = document.querySelectorAll('.popup__close-button');
+
+const fullImageUrl = document.querySelector('.popup__image');
+const fullImageDesc = document.querySelector('.popup__image-title');
+
 
 //функция добавляет слушателей кнопок и карточки
 function addLikeDeleteView(card) {
@@ -61,59 +45,41 @@ function composeCard({
   cardImage.src = link;
   cardImage.alt = `Изображение на котором изображено место ${name}`;
   addLikeDeleteView(newCard);
-  // console.log(cardTitle.textContent, cardImage.src);
   return newCard;
 }
 
 //Удаление карточки
 function deleteCard(event) {
-  const targetCard = event.target.closest('.place-card');
-  targetCard.remove();
+  event.target.closest('.place-card').remove();
 }
 
 //Функция активации/деактивации лайка
 function toggleLike(event) {
-  const likeItem = event.target;
-  likeItem.classList.toggle('place-card__like-button_active');
+  event.target.classList.toggle('place-card__like-button_active');
 }
 
+//Функция отрисовки карточек
 function renderCards() {
   const cardsItems = initialCards.map(composeCard);
   cardsContainerElement.append(...cardsItems);
 }
 
-let profileName = document.querySelector('.profile__name');
-let profileDescription = document.querySelector('.profile__description');
-
+//Функция заполняет инпуты поп-апа редактирования профиля актуальными значениями
 function popupFill(name, description) {
   name.value = profileName.textContent;
   description.value = profileDescription.textContent;
 }
-
-const editButton = document.querySelector('.profile__edit-button');
-const addButton = document.querySelector('.profile__add-button');
-
-const editPopup = document.getElementById('profileEdit');
-const addPopup = document.getElementById('addCard');
-const addImagePopup = document.getElementById('fullSizeImage');
 
 addPopup.querySelector('.popup__save-button_card').addEventListener('click', (evt) => {
   addImageCard();
   popupVisible(evt);
 });
 
-const nameInput = editPopup.querySelector('.popup__input_type_name');
-const jobInput = editPopup.querySelector('.popup__input_type_description');
-
-const placeName = document.querySelector('.popup__input_type_place-name');
-const placeImageUrl = document.querySelector('.popup__input_type_image-link');
-
 function popupVisible(event) {
   const targetPopup = event.target.closest('.popup')
   targetPopup.classList.toggle('popup_opened');
 }
 
-const popupCloseButtons = document.querySelectorAll('.popup__close-button');
 popupCloseButtons.forEach((button) => {
   button.addEventListener('click', popupVisible);
 });
@@ -135,8 +101,8 @@ function addImageCard() {
     link: placeImageUrl.value
   });
   cardsContainerElement.prepend(newImageCard);
-  placeName.value = '';
-  placeImageUrl.value = '';
+  console.log(addPopup.querySelector('.popup__container'));
+  addPopup.querySelector('.popup__container').reset();
 }
 
 function openAddPopup() {
@@ -145,9 +111,6 @@ function openAddPopup() {
     evt.preventDefault();
   });
 }
-
-const fullImageUrl = document.querySelector('.popup__image');
-const fullImageDesc = document.querySelector('.popup__image-title');
 
 //Функция открытие попапа с картинкой
 function openImagePopup(event) {

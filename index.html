@@ -27,50 +27,7 @@
     </section>
 
     <section class="galery">
-      <ul class="galery__places">
-        <!-- <li class="place-card">
-          <img class="place-card__photo" src="./images/places-card-photo-min01.jpg" alt="Фото Карачаевска">
-          <div class="place-card__photo-description">
-            <h2 class="place-card__photo-name">Карачаевск</h2>
-            <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
-          </div>
-        </li>
-        <li class="place-card">
-          <img class="place-card__photo" src="./images/places-card-photo-min02.jpg" alt="Фото Горы Эльбрус">
-          <div class="place-card__photo-description">
-            <h2 class="place-card__photo-name">Гора Эльбрус</h2>
-            <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
-          </div>
-        </li>
-        <li class="place-card">
-          <img class="place-card__photo" src="./images/places-card-photo-min03.jpg" alt="Фото Домбаев">
-          <div class="place-card__photo-description">
-            <h2 class="place-card__photo-name">Домбай</h2>
-            <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
-          </div>
-        </li>
-        <li class="place-card">
-          <img class="place-card__photo" src="./images/places-card-photo-min04.jpg" alt="Фото Байкала">
-          <div class="place-card__photo-description">
-            <h2 class="place-card__photo-name">Байкал</h2>
-            <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
-          </div>
-        </li>
-        <li class="place-card">
-          <img class="place-card__photo" src="./images/places-card-photo-min05.jpg" alt="Фото Ергаков">
-          <div class="place-card__photo-description">
-            <h2 class="place-card__photo-name">Ергаки</h2>
-            <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
-          </div>
-        </li>
-        <li class="place-card">
-          <img class="place-card__photo" src="./images/places-card-photo-min06.jpg" alt="Фото Хибин">
-          <div class="place-card__photo-description">
-            <h2 class="place-card__photo-name">Хибины</h2>
-            <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
-          </div>
-        </li> -->
-      </ul>
+      <ul class="galery__places"></ul>
     </section>
 
   </main>
@@ -98,7 +55,7 @@
         <input type="text" name="name-of-user" class="popup__input popup__input_type_place-name" value=""
           placeholder="Название">
         <input type="text" name="description" class="popup__input popup__input_type_image-link" value=""
-          placeholder="Ссылка на картинку">
+          placeholder="Ссылка на картинку" type="url">
       </div>
       <button type="submit" class="popup__save-button popup__save-button_card">Создать</button>
       <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
@@ -109,8 +66,7 @@
     <div class="popup__image-container">
       <figure class="popup__image-group">
         <img class="popup__image" src="https://picsum.photos/800" alt="Увеличенное изображение">
-        <figcaption class="popup__image-title">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
-          exercitationem officia fugiat eos iste corporis officiis</figcaption>
+        <figcaption class="popup__image-title"></figcaption>
       </figure>
       <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
     </div>
@@ -127,6 +83,7 @@
     </li>
   </template>
 
+  <script src="./scripts/cards.js"></script>
   <script src="./scripts/script.js"></script>
 </body>
 
