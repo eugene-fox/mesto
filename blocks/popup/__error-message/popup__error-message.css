@@ -8,6 +8,7 @@
   color: #FF0000;
   width: calc(100% - 72px);
   margin: 0 36px 0;
+  min-height: 15px;
 }
 
 @media screen and (max-width: 320px) {

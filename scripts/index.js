@@ -34,10 +34,10 @@ function closePopupByOverlayClick(evt) {
   closePopup(evt.target);
 }
 
-function closePopupByEscPress(evt)  {
+function closePopupByEscPress(evt) {
   if (evt.key === 'Escape') {
-     const targetPopup = document.querySelector('.popup_opened');
-     closePopup(targetPopup);
+    const targetPopup = document.querySelector('.popup_opened');
+    closePopup(targetPopup);
   }
 }
 
@@ -112,6 +112,7 @@ function openEditPopup() {
   //заполняем инпуты поп-апа редактирования профиля актуальными значениями
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
+  editPopup.disabled = true;
 }
 
 //Вешаем обработчики кнопки поп-апа редактирования и добавления
