@@ -37,11 +37,17 @@
   </footer>
 
   <section class="popup" id="profileEdit">
-    <form name="profile-edit" class="popup__container">
+    <form name="profile-edit" class="popup__container" novalidate>
       <h3 class="popup__title">Редактировать профиль</h3>
       <div class="popup__inputs">
-        <input type="text" name="name-of-user" class="popup__input popup__input_type_name" value="">
-        <input type="text" name="description" class="popup__input popup__input_type_description" value="">
+        <input type="text" name="name-of-user" class="popup__input popup__input_type_name" value="" autocomplete="off"
+          required minlength="2" maxlength="40">
+        <span class="popup__error-message" id="name-of-user-error"></span>
+
+        <input type="text" name="description" class="popup__input popup__input_type_description" value=""
+          autocomplete="off" required minlength="2" maxlength="200">
+          <span class="popup__error-message" id="description-error"></span>
+
       </div>
       <button type="submit" class="popup__save-button popup__save-button_profile">Сохранить</button>
       <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
@@ -49,13 +55,17 @@
   </section>
 
   <section class="popup" id="addCard">
-    <form name="profile-edit" class="popup__container">
+    <form name="profile-edit" class="popup__container" novalidate>
       <h3 class="popup__title">Новое место</h3>
       <div class="popup__inputs">
-        <input type="text" name="name-of-user" class="popup__input popup__input_type_place-name" value=""
-          placeholder="Название">
-        <input type="url" name="description" class="popup__input popup__input_type_image-link" value=""
+        <input type="text" name="name-of-place" class="popup__input popup__input_type_place-name" value=""
+          autocomplete="off" placeholder="Название" required minlength="2" maxlength="30">
+          <span class="popup__error-message" id="name-of-place-error"></span>
+
+        <input type="url" name="image-url" class="popup__input popup__input_type_image-link" value="" autocomplete="off"
           placeholder="Ссылка на картинку" required>
+          <span class="popup__error-message" id="image-url-error"></span>
+
       </div>
       <button type="submit" class="popup__save-button popup__save-button_card">Создать</button>
       <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
@@ -83,8 +93,9 @@
     </li>
   </template>
 
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/cards.js"></script>
-  <script src="./scripts/script.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>

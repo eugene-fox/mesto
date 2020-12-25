@@ -1,13 +1,13 @@
 const initialCards = [{
-  name: 'Random place',
+  name: 'Где то далеко',
   link: 'https://picsum.photos/1920/1080?random=1'
 },
 {
-  name: 'Random place',
+  name: 'Там, где нас нет',
   link: 'https://picsum.photos/1920/1080?random=2'
 },
 {
-  name: 'Random place',
+  name: 'Случайное место',
   link: 'https://picsum.photos/1920/1080?random=3'
 },
 {
