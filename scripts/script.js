@@ -23,12 +23,28 @@ const popupCloseButtons = document.querySelectorAll('.popup__close-button');
 const fullImageUrl = document.querySelector('.popup__image');
 const fullImageDesc = document.querySelector('.popup__image-title');
 
+//Универсальные функции открытия и закрытия поп-апов
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  popup.addEventListener('click', closePopupByOverlayClick);
+  document.addEventListener('keydown', closePopupByEscPress);
+}
+
+function closePopupByOverlayClick(evt) {
+  closePopup(evt.target);
+}
+
+function closePopupByEscPress(evt)  {
+  if (evt.key === 'Escape') {
+     const targetPopup = document.querySelector('.popup_opened');
+     closePopup(targetPopup);
+  }
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  popup.removeEventListener('click', closePopupByOverlayClick);
+  document.removeEventListener('keydown', closePopupByEscPress);
 }
 
 //Функция открытие попапа с картинкой
@@ -85,7 +101,7 @@ function addImageCard() {
 }
 
 popupCloseButtons.forEach((button) => {
-  button.addEventListener('click', (evt) =>{
+  button.addEventListener('click', (evt) => {
     const targetPopup = evt.target.closest('.popup');
     closePopup(targetPopup);
   });
@@ -101,7 +117,7 @@ function openEditPopup() {
 //Вешаем обработчики кнопки поп-апа редактирования и добавления
 editButton.addEventListener('click', openEditPopup);
 addButton.addEventListener('click', () => {
-openPopup(addPopup);
+  openPopup(addPopup);
 });
 
 //Вешаем обработчик на сабмит формы редактирования профиля
