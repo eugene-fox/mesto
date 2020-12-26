@@ -84,8 +84,8 @@ function composeCard({
 }
 
 //Функция отрисовки карточек
-function renderCards() {
-  const cardsItems = initialCards.map(composeCard);
+function renderCards(cards) {
+  const cardsItems = cards.map(composeCard);
   cardsContainerElement.append(...cardsItems);
 }
 
@@ -96,8 +96,10 @@ function addImageCard() {
     link: placeImageUrl.value
   });
   cardsContainerElement.prepend(newImageCard);
-
   addPopup.querySelector('.popup__container').reset();
+  const targetButton = addPopup.querySelector('.popup__save-button');
+  const targetForm =addPopup.querySelector('.popup__container');
+  setButtonState(targetButton, targetForm.checkValidity(), validationConfig);
 }
 
 popupCloseButtons.forEach((button) => {
@@ -112,7 +114,9 @@ function openEditPopup() {
   //заполняем инпуты поп-апа редактирования профиля актуальными значениями
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
-  editPopup.disabled = true;
+  const targetButton = editPopup.querySelector('.popup__save-button');
+  const targtForm = editPopup.querySelector('.popup__container');
+  setButtonState(targetButton, targtForm.checkValidity(), validationConfig);
 }
 
 //Вешаем обработчики кнопки поп-апа редактирования и добавления
@@ -142,4 +146,5 @@ addPopup.querySelector('.popup__save-button_card').addEventListener('click', () 
   closePopup(addPopup);
 });
 
-renderCards();
+enableValidation(validationConfig);
+renderCards(initialCards);

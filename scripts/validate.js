@@ -56,5 +56,3 @@ function enableValidation(config) {
     setButtonState(submitButton, form.checkValidity(), config);
   });
 }
-
-enableValidation(validationConfig);
