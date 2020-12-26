@@ -69,8 +69,8 @@ function toggleLike(event) {
 function composeCard({
   name,
   link
-}) {
-  const newCard = templateElement.content.cloneNode(true);
+}, template) {
+  const newCard = template.content.cloneNode(true);
   const cardTitle = newCard.querySelector('.place-card__photo-name');
   const cardImage = newCard.querySelector('.place-card__photo');
   cardTitle.textContent = name;
@@ -84,17 +84,19 @@ function composeCard({
 }
 
 //Функция отрисовки карточек
-function renderCards(cards) {
-  const cardsItems = cards.map(composeCard);
+function renderCards(cards, template) {
+  const cardsItems = cards.map((card) => {
+    return composeCard(card, template);
+  });
   cardsContainerElement.append(...cardsItems);
 }
 
 //Данная функция должна обрабатывать сабмит формы добавления карточки.
-function addImageCard() {
+function addImageCard(template) {
   const newImageCard = composeCard({
     name: placeName.value,
     link: placeImageUrl.value
-  });
+  }, template);
   cardsContainerElement.prepend(newImageCard);
   addPopup.querySelector('.popup__container').reset();
   const targetButton = addPopup.querySelector('.popup__save-button');
@@ -135,7 +137,7 @@ editPopup.querySelector('.popup__container').addEventListener('submit', (evt) =>
 //Вешаем обработчик на сабмит формы добавления карточки с фото
 addPopup.querySelector('.popup__container').addEventListener('submit', (evt) => {
   evt.preventDefault();
-  addImageCard();
+  addImageCard(templateElement);
 });
 
 //Вешаем обработчики на кнопки поп-апов, которые вызывают сабмит формы и в последсвии их закрывают
@@ -147,4 +149,4 @@ addPopup.querySelector('.popup__save-button_card').addEventListener('click', () 
 });
 
 enableValidation(validationConfig);
-renderCards(initialCards);
+renderCards(initialCards, templateElement);
