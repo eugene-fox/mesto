@@ -1,4 +1,4 @@
-const initialCards = [{
+export const initialCards = [{
   name: 'Где то далеко',
   link: 'https://picsum.photos/1920/1080?random=1'
 },

@@ -1,3 +1,10 @@
+import {
+  initialCards
+} from './initialCards.js';
+import {
+  Card
+} from './Card.js';
+
 //объявляем необходимые константы
 const cardsContainerElement = document.querySelector('.galery__places');
 const templateElement = document.querySelector('.card-template');
@@ -83,11 +90,10 @@ function composeCard({
   return newCard;
 }
 
-//Функция отрисовки карточек
-function renderCards(cards, template) {
-  const cardsItems = cards.map((card) => {
-    return composeCard(card, template);
-  });
+//Функция отрисовки карточек при инициализации страницы
+function initialCardsRender(cards, template) {
+  const cardClasses = cards.map((card) => (new Card(card, template)));
+  const cardsItems = cardClasses.map((card) => (card.composeCard()));
   cardsContainerElement.append(...cardsItems);
 }
 
@@ -100,7 +106,7 @@ function addImageCard(template) {
   cardsContainerElement.prepend(newImageCard);
   addPopup.querySelector('.popup__container').reset();
   const targetButton = addPopup.querySelector('.popup__save-button');
-  const targetForm =addPopup.querySelector('.popup__container');
+  const targetForm = addPopup.querySelector('.popup__container');
   setButtonState(targetButton, targetForm.checkValidity(), validationConfig);
 }
 
@@ -149,4 +155,5 @@ addPopup.querySelector('.popup__save-button_card').addEventListener('click', () 
 });
 
 enableValidation(validationConfig);
-renderCards(initialCards, templateElement);
+
+initialCardsRender(initialCards, templateElement);
