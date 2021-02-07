@@ -4,6 +4,9 @@ import {
 import {
   Card
 } from './Card.js';
+import {
+  FormValidator
+} from './FormValidator.js';
 
 //объявляем необходимые константы
 const cardsContainerElement = document.querySelector('.galery__places');
@@ -17,6 +20,9 @@ const addButton = document.querySelector('.profile__add-button');
 
 const editPopup = document.getElementById('profileEdit');
 const addPopup = document.getElementById('addCard');
+const profileForm = editPopup.querySelector('.popup__container_profile');
+const imageCardForm = addPopup.querySelector('.popup__container_card');
+
 const addImagePopup = document.getElementById('fullSizeImage');
 
 const nameInput = editPopup.querySelector('.popup__input_type_name');
@@ -55,59 +61,28 @@ function closePopup(popup) {
 }
 
 //Функция открытие попапа с картинкой
-function openImagePopup(event) {
-  fullImageUrl.src = event.target.src;
-  fullImageUrl.alt = event.target.alt;
-  fullImageDesc.textContent = event.target.closest('.place-card').querySelector('.place-card__photo-name').textContent;
+function openImagePopup(name, link) {
+  fullImageUrl.src = link;
+  fullImageUrl.alt = name;
+  fullImageDesc.textContent = name;
   openPopup(addImagePopup);
 }
-
-//Функция удаление карточки
-function deleteCard(event) {
-  event.target.closest('.place-card').remove();
-}
-
-//Функция активации/деактивации лайка
-function toggleLike(event) {
-  event.target.classList.toggle('place-card__like-button_active');
-}
-
-//Функция создания карточки
-function composeCard({
-  name,
-  link
-}, template) {
-  const newCard = template.content.cloneNode(true);
-  const cardTitle = newCard.querySelector('.place-card__photo-name');
-  const cardImage = newCard.querySelector('.place-card__photo');
-  cardTitle.textContent = name;
-  cardImage.src = link;
-  cardImage.alt = `Изображение на котором изображено место ${name}`;
-  //Добавляем новой карточки обработчики клика на Удаление, Лайк и открытие картинки карточки
-  newCard.querySelector('.place-card__delete-button').addEventListener('click', deleteCard);
-  newCard.querySelector('.place-card__like-button').addEventListener('click', toggleLike);
-  newCard.querySelector('.place-card__photo').addEventListener('click', openImagePopup);
-  return newCard;
-}
-
 //Функция отрисовки карточек при инициализации страницы
-function initialCardsRender(cards, template) {
-  const cardClasses = cards.map((card) => (new Card(card, template)));
+function initialCardsRender(cards, template, handleCardClick) {
+  const cardClasses = cards.map((card) => (new Card(card, template, handleCardClick)));
   const cardsItems = cardClasses.map((card) => (card.composeCard()));
   cardsContainerElement.append(...cardsItems);
 }
 
 //Данная функция должна обрабатывать сабмит формы добавления карточки.
 function addImageCard(template) {
-  const newImageCard = composeCard({
+  const newImageCard = new Card({
     name: placeName.value,
     link: placeImageUrl.value
-  }, template);
-  cardsContainerElement.prepend(newImageCard);
+  }, template, openImagePopup);
+  cardsContainerElement.prepend(newImageCard.composeCard());
   addPopup.querySelector('.popup__container').reset();
-  const targetButton = addPopup.querySelector('.popup__save-button');
-  const targetForm = addPopup.querySelector('.popup__container');
-  setButtonState(targetButton, targetForm.checkValidity(), validationConfig);
+  imageCardFormValidator.resetValidation();
 }
 
 popupCloseButtons.forEach((button) => {
@@ -122,9 +97,8 @@ function openEditPopup() {
   //заполняем инпуты поп-апа редактирования профиля актуальными значениями
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
-  const targetButton = editPopup.querySelector('.popup__save-button');
-  const targtForm = editPopup.querySelector('.popup__container');
-  setButtonState(targetButton, targtForm.checkValidity(), validationConfig);
+
+  profileFormValidator.resetValidation();
 }
 
 //Вешаем обработчики кнопки поп-апа редактирования и добавления
@@ -154,6 +128,18 @@ addPopup.querySelector('.popup__save-button_card').addEventListener('click', () 
   closePopup(addPopup);
 });
 
-enableValidation(validationConfig);
+const validationConfig = {
+  formSelector: '.popup__container',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_state_invalid',
+  inputErrorClass: 'popup__input_state_invalid'
+}
 
-initialCardsRender(initialCards, templateElement);
+// enableValidation(validationConfig);
+const profileFormValidator = new FormValidator(profileForm, validationConfig);
+profileFormValidator.enableValidation();
+const imageCardFormValidator = new FormValidator(imageCardForm, validationConfig);
+imageCardFormValidator.enableValidation();
+
+initialCardsRender(initialCards, templateElement, openImagePopup);

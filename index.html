@@ -37,7 +37,7 @@
   </footer>
 
   <section class="popup" id="profileEdit">
-    <form name="profile-edit" class="popup__container" novalidate>
+    <form name="profile-edit" class="popup__container popup__container_profile" novalidate>
       <h3 class="popup__title">Редактировать профиль</h3>
       <div class="popup__inputs">
         <input type="text" name="name-of-user" class="popup__input popup__input_type_name" value="" autocomplete="off"
@@ -55,7 +55,7 @@
   </section>
 
   <section class="popup" id="addCard">
-    <form name="profile-edit" class="popup__container" novalidate>
+    <form name="profile-edit" class="popup__container popup__container_card" novalidate>
       <h3 class="popup__title">Новое место</h3>
       <div class="popup__inputs">
         <input type="text" name="name-of-place" class="popup__input popup__input_type_place-name" value=""
@@ -75,7 +75,7 @@
   <section class="popup" id="fullSizeImage">
     <div class="popup__image-container">
       <figure class="popup__image-group">
-        <img class="popup__image" src="https://picsum.photos/800" alt="Увеличенное изображение">
+        <img class="popup__image" src="" alt="Увеличенное изображение">
         <figcaption class="popup__image-title"></figcaption>
       </figure>
       <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
@@ -96,9 +96,6 @@
   <script type="module" src="./scripts/initialCards.js"></script>
   <script type="module" src="./scripts/FormValidator.js"></script>
   <script type="module" src="./scripts/Card.js"></script>
-
-  <script src="./scripts/validate.js"></script>
-
   <script type="module" src="./scripts/index.js"></script>
 </body>
 
