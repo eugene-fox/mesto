@@ -81,7 +81,7 @@ function addImageCard(template) {
     link: placeImageUrl.value
   }, template, openImagePopup);
   cardsContainerElement.prepend(newImageCard.composeCard());
-  addPopup.querySelector('.popup__container').reset();
+  imageCardForm.reset();
   imageCardFormValidator.resetValidation();
 }
 
@@ -108,23 +108,17 @@ addButton.addEventListener('click', () => {
 });
 
 //Вешаем обработчик на сабмит формы редактирования профиля
-editPopup.querySelector('.popup__container').addEventListener('submit', (evt) => {
+profileForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
+  closePopup(editPopup);
 });
 
 //Вешаем обработчик на сабмит формы добавления карточки с фото
-addPopup.querySelector('.popup__container').addEventListener('submit', (evt) => {
+imageCardForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   addImageCard(templateElement);
-});
-
-//Вешаем обработчики на кнопки поп-апов, которые вызывают сабмит формы и в последсвии их закрывают
-editPopup.querySelector('.popup__save-button_profile').addEventListener('click', () => {
-  closePopup(editPopup);
-});
-addPopup.querySelector('.popup__save-button_card').addEventListener('click', () => {
   closePopup(addPopup);
 });
 

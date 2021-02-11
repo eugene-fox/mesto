@@ -48,7 +48,7 @@ export class FormValidator {
   resetValidation() {
     this._setButtonState(this._submitButton, this._form.checkValidity(), this._config);
     this._inputList.forEach((input) => {
-      this._checkInputValidity(input)
+      this._hideError(input);
     });
   }
 

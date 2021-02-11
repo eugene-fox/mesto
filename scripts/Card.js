@@ -15,7 +15,7 @@ export class Card {
   _setEventListeners() {
     this._element.querySelector('.place-card__delete-button').addEventListener('click', this._deleteCard);
     this._element.querySelector('.place-card__like-button').addEventListener('click', this._toggleLike);
-    this._element.querySelector('.place-card__photo').addEventListener('click', () => {
+    this._elementImage.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)
     });
   }
@@ -25,7 +25,7 @@ export class Card {
       event.target.closest('.place-card').remove();
       this._element = null;
     }
-    
+
     //Метод активации/деактивации лайка
     _toggleLike(event) {
       event.target.classList.toggle('place-card__like-button_active');
