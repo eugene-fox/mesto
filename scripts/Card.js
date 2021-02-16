@@ -1,4 +1,4 @@
-export class Card {
+export default class Card {
   constructor(cardData, cardTemplate, handleCardClick) {
     this._name = cardData.name;
     this._link = cardData.link;
@@ -25,7 +25,7 @@ export class Card {
       event.target.closest('.place-card').remove();
       this._element = null;
     }
-    
+
     //Метод активации/деактивации лайка
     _toggleLike(event) {
       event.target.classList.toggle('place-card__like-button_active');
