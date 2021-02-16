@@ -7,6 +7,7 @@ import {
 import {
   FormValidator
 } from './FormValidator.js';
+import Section from './Section.js';
 
 //объявляем необходимые константы
 const cardsContainerElement = document.querySelector('.galery__places');
@@ -67,12 +68,26 @@ function openImagePopup(name, link) {
   fullImageDesc.textContent = name;
   openPopup(addImagePopup);
 }
-//Функция отрисовки карточек при инициализации страницы
-function initialCardsRender(cards, template, handleCardClick) {
-  const cardClasses = cards.map((card) => (new Card(card, template, handleCardClick)));
-  const cardsItems = cardClasses.map((card) => (card.composeCard()));
-  cardsContainerElement.append(...cardsItems);
+
+//Функция создает и возвращает готовую карточку с использованием метода класса Card
+function cardCreate(card) {
+  const cardItem = new Card(card, templateElement, openImagePopup); //???
+  return cardItem.composeCard();
 }
+
+//Реализуем отрисовку начальных карточек
+const initialCardsRender = new Section({
+    items: initialCards,
+    renderer: (card) => {
+      const newCardItem = cardCreate(card);
+      initialCardsRender.addItem(newCardItem);
+    }
+  },
+  cardsContainerElement
+);
+
+//Вызываем отрисовку начальных карточек
+initialCardsRender.renderItems();
 
 //Данная функция должна обрабатывать сабмит формы добавления карточки.
 function addImageCard(template) {
