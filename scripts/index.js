@@ -1,6 +1,7 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
+import PopupWithImage from './PopupWithImage.js';
 
 import {
   initialCards,
@@ -25,41 +26,19 @@ import {
   fullImageDesc,
 } from '../utils/constants.js';
 
-//Универсальные функции открытия и закрытия поп-апов
-// function openPopup(popup) {
-//   popup.classList.add('popup_opened');
-//   popup.addEventListener('click', closePopupByOverlayClick);
-//   document.addEventListener('keydown', closePopupByEscPress);
-// }
-
-// function closePopupByOverlayClick(evt) {
-//   closePopup(evt.target);
-// }
-
-// function closePopupByEscPress(evt) {
-//   if (evt.key === 'Escape') {
-//     const targetPopup = document.querySelector('.popup_opened');
-//     closePopup(targetPopup);
-//   }
-// }
-
-// function closePopup(popup) {
-//   popup.classList.remove('popup_opened');
-//   popup.removeEventListener('click', closePopupByOverlayClick);
-//   document.removeEventListener('keydown', closePopupByEscPress);
-// }
-
-//Функция открытие попапа с картинкой
-function openImagePopup(name, link) {
-  fullImageUrl.src = link;
-  fullImageUrl.alt = name;
-  fullImageDesc.textContent = name;
-  openPopup(addImagePopup);
-}
 //=================================================================================
+
+//Создаем поп-ап с картинкой
+const imagePopup = new PopupWithImage('fullSizeImage');
+imagePopup.setEventListeners();
+
+export function handleImageCardClick(name, link) {
+	imagePopup.openPopup(name, link);
+}
+
 //Функция создает и возвращает готовую карточку с использованием метода класса Card
 function cardCreate(card) {
-  const cardItem = new Card(card, templateElement, openImagePopup); //???
+  const cardItem = new Card(card, templateElement, handleImageCardClick); //???
   return cardItem.composeCard();
 }
 

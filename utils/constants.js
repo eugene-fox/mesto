@@ -59,7 +59,7 @@ export const addPopup = document.getElementById('addCard');
 export const profileForm = editPopup.querySelector('.popup__container_profile');
 export const imageCardForm = addPopup.querySelector('.popup__container_card');
 
-export const addImagePopup = document.getElementById('fullSizeImage');
+export const addImagePopup = document.getElementById('fullSizeImage');//не нужен больше
 
 export const nameInput = editPopup.querySelector('.popup__input_type_name');
 export const jobInput = editPopup.querySelector('.popup__input_type_description');
