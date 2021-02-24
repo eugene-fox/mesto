@@ -9,7 +9,7 @@ export default class Section {
   }
 
   addItem(item) {
-    this._containerSelector.append(item);
+    this._containerSelector.prepend(item);
   }
 
   renderItems() {

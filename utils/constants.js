@@ -48,8 +48,8 @@ export const validationConfig = {
 export const cardsContainerElement = document.querySelector('.galery__places');
 export const templateElement = document.querySelector('.card-template');
 
-export const profileName = document.querySelector('.profile__name');
-export const profileDescription = document.querySelector('.profile__description');
+export const profileName = '.profile__name';
+export const profileDescription = '.profile__description';
 
 export const editButton = document.querySelector('.profile__edit-button');
 export const addButton = document.querySelector('.profile__add-button');
@@ -61,8 +61,8 @@ export const imageCardForm = addPopup.querySelector('.popup__container_card');
 
 export const addImagePopup = document.getElementById('fullSizeImage');//не нужен больше
 
-export const nameInput = editPopup.querySelector('.popup__input_type_name');
-export const jobInput = editPopup.querySelector('.popup__input_type_description');
+export const nameInput = '.popup__input_type_name';
+export const jobInput = '.popup__input_type_description';
 
 export const placeName = document.querySelector('.popup__input_type_place-name');
 export const placeImageUrl = document.querySelector('.popup__input_type_image-link');
