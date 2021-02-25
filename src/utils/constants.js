@@ -43,31 +43,3 @@ export const validationConfig = {
   inactiveButtonClass: 'popup__save-button_state_invalid',
   inputErrorClass: 'popup__input_state_invalid'
 }
-
-//объявляем необходимые константы
-export const cardsContainerElement = document.querySelector('.galery__places');
-export const templateElement = document.querySelector('.card-template');
-
-export const profileName = '.profile__name';
-export const profileDescription = '.profile__description';
-
-export const editButton = document.querySelector('.profile__edit-button');
-export const addButton = document.querySelector('.profile__add-button');
-
-export const editPopup = document.getElementById('profileEdit');
-export const addPopup = document.getElementById('addCard');
-export const profileForm = editPopup.querySelector('.popup__container_profile');
-export const imageCardForm = addPopup.querySelector('.popup__container_card');
-
-export const addImagePopup = document.getElementById('fullSizeImage');//не нужен больше
-
-export const nameInput = '.popup__input_type_name';
-export const jobInput = '.popup__input_type_description';
-
-export const placeName = document.querySelector('.popup__input_type_place-name');
-export const placeImageUrl = document.querySelector('.popup__input_type_image-link');
-
-export const popupCloseButtons = document.querySelectorAll('.popup__close-button');
-
-export const fullImageUrl = document.querySelector('.popup__image');
-export const fullImageDesc = document.querySelector('.popup__image-title');

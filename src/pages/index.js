@@ -9,19 +9,28 @@ import UserInfo from '../components/UserInfo.js';
 import {
   initialCards,
   validationConfig,
-  cardsContainerElement,
-  templateElement,
-  profileName,
-  profileDescription,
-  editButton,
-  addButton,
-  profileForm,
-  imageCardForm,
-  nameInput,
-  jobInput,
-  placeName,
-  placeImageUrl,
 } from '../utils/constants.js';
+
+//объявляем необходимые константы
+const cardsContainerElement = document.querySelector('.galery__places');
+const templateElement = document.querySelector('.card-template');
+
+const profileName = '.profile__name';
+const profileDescription = '.profile__description';
+
+const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
+
+const editPopup = document.getElementById('profileEdit');
+const addPopup = document.getElementById('addCard');
+const profileForm = editPopup.querySelector('.popup__container_profile');
+const imageCardForm = addPopup.querySelector('.popup__container_card');
+
+const nameInput = '.popup__input_type_name';
+const jobInput = '.popup__input_type_description';
+
+const placeName = document.querySelector('.popup__input_type_place-name');
+const placeImageUrl = document.querySelector('.popup__input_type_image-link');
 
 //=================================================================================
 
