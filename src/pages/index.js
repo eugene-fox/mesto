@@ -26,8 +26,8 @@ const addPopup = document.getElementById('addCard');
 const profileForm = editPopup.querySelector('.popup__container_profile');
 const imageCardForm = addPopup.querySelector('.popup__container_card');
 
-const nameInput = '.popup__input_type_name';
-const jobInput = '.popup__input_type_description';
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_description');
 
 const placeName = document.querySelector('.popup__input_type_place-name');
 const placeImageUrl = document.querySelector('.popup__input_type_image-link');
@@ -49,9 +49,11 @@ const profileEditPopup = new PopupWithForm('profileEdit', () => {
 profileEditPopup.setEventListeners();
 
 editButton.addEventListener("click", () => {
-	userInformation.getUserInfo();
-	profileFormValidator.resetValidation();
-	profileEditPopup.openPopup();
+  const userInfo = userInformation.getUserInfo();
+  nameInput.value = userInfo.name;
+  jobInput.value = userInfo.description;
+  profileFormValidator.resetValidation();
+  profileEditPopup.openPopup();
 });
 
 //Создаем поп-ап с картинкой
@@ -101,4 +103,3 @@ addButton.addEventListener('click', () => {
 });
 
 //=================================================================================
-
