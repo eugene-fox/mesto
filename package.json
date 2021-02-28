@@ -34,5 +34,6 @@
   },
   "dependencies": {
     "core-js": "^3.9.0"
-  }
+  },
+  "keywords": []
 }
