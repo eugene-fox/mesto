@@ -77,6 +77,14 @@
     </div>
   </section>
 
+  <section class="popup" id="CardDeleteConfirm">
+    <div class="popup__container">
+      <h3 class="popup__title">Вы уверены?</h3>
+      <button type="button" class="popup__save-button popup__save-button_card">Да</button>
+      <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
+    </div>
+  </section>
+
   <template class="card-template">
     <li class="place-card">
       <button type="button" aria-label="Удалить" class="place-card__delete-button"></button>
@@ -84,7 +92,10 @@
         alt="Шаблонное изображение">
       <div class="place-card__photo-description">
         <h2 class="place-card__photo-name"></h2>
-        <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
+        <div class="place-card__like-button-container">
+          <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
+          <span class="place-card__like-counter">0</span>
+        </div>
       </div>
     </li>
   </template>
