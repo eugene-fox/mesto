@@ -22,8 +22,10 @@
 
 @import url("../blocks/place-card/place-card.css");
 @import url("../blocks/place-card/__delete-button/place-card__delete-button.css");
+@import url("../blocks/place-card/__like-section/place-card__like-section.css");
 @import url("../blocks/place-card/__like-button/place-card__like-button.css");
 @import url("../blocks/place-card/__like-button/_active/place-card__like-button_active.css");
+@import url("../blocks/place-card/__like-count/place-card__like-count.css");
 @import url("../blocks/place-card/__photo-description/place-card__photo-description.css");
 @import url("../blocks/place-card/__photo-name/place-card__photo-name.css");
 @import url("../blocks/place-card/__photo/place-card__photo.css");
