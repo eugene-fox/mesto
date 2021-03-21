@@ -2,6 +2,7 @@
   max-width: 120px;
   border-radius: 50%;
   grid-area: Avatar;
+  position: relative;
 }
 
 @media screen and (max-width: 524px) {
@@ -9,4 +10,3 @@
     justify-self: center;
   }
 }
-
