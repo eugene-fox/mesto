@@ -18,7 +18,8 @@
     <section class="profile">
       <div class="profile__information">
         <div class="profile__avatar">
-          <img class="profile__avatar-picture" src="<%=require('./images/avatar.jpg')%>" alt="Фотография Жака-Ива Кусто">
+          <img class="profile__avatar-picture" src="<%=require('./images/avatar.jpg')%>"
+            alt="Фотография Жака-Ива Кусто">
           <button type="button" aria-label="Изменить изображение профиля" class="profile__avatar-edit"></button>
         </div>
         <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -74,6 +75,19 @@
     <form name="delete-confirm" class="popup__container popup__container_deleteConfirm" novalidate>
       <h3 class="popup__title">Вы уверены?</h3>
       <button type="submit" class="popup__save-button popup__save-button_card">Да</button>
+      <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
+    </form>
+  </section>
+
+  <section class="popup" id="updateAvatar">
+    <form name="delete-confirm" class="popup__container popup__container_deleteConfirm" novalidate>
+      <h3 class="popup__title">Обновить аватар</h3>
+      <div class="popup__inputs">
+        <input type="text" name="name-of-place" class="popup__input popup__input_type_place-name" value=""
+          autocomplete="off" placeholder="url" required minlength="2" maxlength="30">
+        <span class="popup__error-message" id="name-of-place-error"></span>
+      </div>
+      <button type="submit" class="popup__save-button popup__save-button_card">Сохранить</button>
       <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
     </form>
   </section>
