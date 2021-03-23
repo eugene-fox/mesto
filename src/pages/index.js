@@ -5,6 +5,7 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
 
 import {
   initialCards,
@@ -17,6 +18,7 @@ const templateElement = document.querySelector('.card-template');
 
 const profileName = '.profile__name';
 const profileDescription = '.profile__description';
+const profilePicture = '.profile__avatar-picture';
 
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
@@ -34,20 +36,32 @@ const placeImageUrl = document.querySelector('.popup__input_type_image-link');
 
 //=================================================================================
 
+const api = new Api('233fa192-0365-43b1-9635-9ca57a07d48d', 'https://mesto.nomoreparties.co/v1/', 'cohort-20');
+
 const profileFormValidator = new FormValidator(profileForm, validationConfig);
 profileFormValidator.enableValidation();
 const imageCardFormValidator = new FormValidator(imageCardForm, validationConfig);
 imageCardFormValidator.enableValidation();
 
-const userInformation = new UserInfo(profileName, profileDescription, nameInput, jobInput);
+//Создаем объект с информацией о пользователе
+const userInformation = new UserInfo(profileName, profileDescription, profilePicture);
 
 //Создаем поп-ап редактирования профиля
 const profileEditPopup = new PopupWithForm('profileEdit', () => {
-  userInformation.setUserInfo();
+  api.setUserInfo({
+      name: nameInput.value,
+      about: jobInput.value
+    })
+    .then(data => userInformation.setUserInfo({
+      newProfileName: data.name,
+      newProfileDescription: data.about
+    }))
+    .catch(err => console.log(err));
 });
 
 profileEditPopup.setEventListeners();
 
+//вешаем слушателя на кнопку редактирования профиля
 editButton.addEventListener("click", () => {
   const userInfo = userInformation.getUserInfo();
   nameInput.value = userInfo.name;
@@ -103,3 +117,16 @@ addButton.addEventListener('click', () => {
 });
 
 //=================================================================================
+
+//Получаем данные о пользователе с сервера при загрузке страницы
+api.getUserInfo()
+  .then(userData => {
+    console.log('Из index.js')
+    console.log(userData);
+    userInformation.setUserInfo({
+      newProfileName: userData.name,
+      newProfileDescription: userData.about,
+      newProfilePicture: userData.avatar
+    });
+  })
+  .catch(err => console.log(err));

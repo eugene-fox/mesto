@@ -1,5 +1,3 @@
-import { data } from "autoprefixer";
-
 export default class Api {
   constructor(token, url, cohortId) {
     this._token = token;
@@ -9,7 +7,7 @@ export default class Api {
 
   //Получаем данные пользователя с сервера
   getUserInfo() {
-    fetch(`${this._url}${this._cohortId}/users/me`, {
+    return fetch(`${this._url}${this._cohortId}/users/me`, {
         headers: {
           authorization: this._token
         }
@@ -21,11 +19,26 @@ export default class Api {
         // если ошибка, отклоняем промис
         return Promise.reject(`Ошибка: ${res.status}`);
       })
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
   }
 
-  setUserInfo() {
-
+  //Отправляем данные пользователя на сервер
+  setUserInfo(userData) {
+    console.log(userData);
+    return fetch(`${this._url}${this._cohortId}/users/me`, {
+        method: 'PATCH',
+        headers: {
+          authorization: this._token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+      })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        // если ошибка, отклоняем промис
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
   }
+
 }
