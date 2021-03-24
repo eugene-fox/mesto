@@ -107,20 +107,35 @@ avatarEditButton.addEventListener('click', () => {
 const imagePopup = new PopupWithImage('fullSizeImage');
 imagePopup.setEventListeners();
 
+//Создаем поп-ап подтверждения удаления карточки
+const cardDeleteConfirmPopup = new PopupWithForm('deleteConfirm', () => {
+
+})
+cardDeleteConfirmPopup.setEventListeners();
+
 export function handleImageCardClick(name, link) {
   imagePopup.openPopup(name, link);
 }
 
+export function handleCardDeleteClick(cardId){
+  api.deleteCard(cardId).then(() => console.log('Карточка удалилась)'));
+}
+
 //Функция создает и возвращает готовую карточку с использованием метода класса Card
-function cardCreate(card) {
-  const cardItem = new Card(card, templateElement, handleImageCardClick, currentUserId);
+function cardCreate(cardData) {
+  const cardItem = new Card(cardData, templateElement, handleImageCardClick, currentUserId, handleCardDeleteClick, cardDeleteConfirmPopup);
   return cardItem.composeCard();
 }
 
 //Реализуем отрисовку начальных карточек
 const initialCardsRender = new Section({
-    renderer: (card) => {
-      const newCardItem = cardCreate(card);
+    renderer: (cardData) => {
+      const newCardItem = cardCreate({
+        name: cardData.name,
+        link: cardData.link,
+        cardCreatorId: cardData.owner._id,
+        cardId: cardData._id
+      });
       initialCardsRender.addItem(newCardItem);
     }
   },
@@ -134,11 +149,11 @@ const addImageCardPopup = new PopupWithForm('addCard', () => {
     link: placeImageUrl.value
   })
   .then((cardData) => {
-    console.log(cardData);
     const newCardItem = cardCreate({
       name: cardData.name,
       link: cardData.link,
-      cardCreatorId: cardData.owner._id
+      cardCreatorId: cardData.owner._id,
+      cardId: cardData._id
     });
     initialCardsRender.addItem(newCardItem);
     imageCardFormValidator.resetValidation();

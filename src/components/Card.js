@@ -1,11 +1,17 @@
 export default class Card {
-  constructor(cardData, cardTemplate, handleCardClick, userId) {
+  constructor(cardData, cardTemplate, handleCardClick, userId, handleCardDeleteClick, confirmDeletePopup) {
     this._name = cardData.name;
     this._link = cardData.link;
-    this._cardCreatorId = cardData.owner._id;
+    this._cardId = cardData.cardId;
+    this._cardCreatorId = cardData.cardCreatorId;
     this._cardTemplate = cardTemplate;
     this._handleCardClick = handleCardClick;
+    this._handleCardDeleteClick = handleCardDeleteClick;
+    this._deleteCard = this._deleteCard.bind(this);
     this._userId = userId;
+    this._cardId = cardData.cardId;
+
+    this._confirmDeletePopup = confirmDeletePopup;
   }
 
   //Получаем разметку карточки
@@ -18,7 +24,11 @@ export default class Card {
 
     //Если карточка не пользователя, тогда слушатель не вешаем
     if (cardIsMy) {
-      this._element.querySelector('.place-card__delete-button').addEventListener('click', this._deleteCard);
+      this._element.querySelector('.place-card__delete-button').addEventListener('click', (evt) => {
+        this._confirmDeletePopup.openPopup();
+        this._handleCardDeleteClick(this._cardId);
+        this._deleteCard(evt);
+      });
     }
 
     this._element.querySelector('.place-card__like-button').addEventListener('click', this._toggleLike);
@@ -51,6 +61,7 @@ export default class Card {
     let cardIsMy = true;
     //Сравниваем айдишники пользователя и создателя, если отличаются не отображаем кнопку удаления
     if (this._cardCreatorId != this._userId) {
+      console.log('скрываю кнопку\n', this._cardCreatorId, '\n', this._userId, this._cardId);
       deleteButton.classList.add('place-card__delete-button_hidden');
       cardIsMy = false;
     }
