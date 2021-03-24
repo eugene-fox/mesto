@@ -43,7 +43,7 @@ export default class Api {
       .then(this.checkResponse)
   }
 
-  deleteCard(cardId) {
+  deleteCard(gitcardId) {
     return fetch(`${this._url}${this._cohortId}/cards/${cardId}`, {
       method: 'DELETE',
       headers: {
