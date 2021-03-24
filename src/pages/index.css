@@ -24,6 +24,7 @@
 
 @import url("../blocks/place-card/place-card.css");
 @import url("../blocks/place-card/__delete-button/place-card__delete-button.css");
+@import url("../blocks/place-card/__delete-button/_hidden/place-card__delete-button_hidden.css");
 @import url("../blocks/place-card/__like-section/place-card__like-section.css");
 @import url("../blocks/place-card/__like-button/place-card__like-button.css");
 @import url("../blocks/place-card/__like-button/_active/place-card__like-button_active.css");

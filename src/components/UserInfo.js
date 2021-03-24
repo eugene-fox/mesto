@@ -14,9 +14,11 @@ export default class UserInfo {
   }
 
   getUserInfo() {
+    console.log(this._profilePicture);
     const userInfo = {
       name: this._profileName.textContent,
-      description: this._profileDescription.textContent
+      description: this._profileDescription.textContent,
+      avatar: this._profilePicture.src
     }
     return userInfo;
   }

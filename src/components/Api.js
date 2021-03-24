@@ -5,6 +5,54 @@ export default class Api {
     this._cohortId = cohortId;
   }
 
+  //проверяем ответ сервера
+  checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    // если ошибка, отклоняем промис
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
+
+  //Получаем карточки с сервера
+  getCards() {
+    return fetch(`${this._url}${this._cohortId}/cards`, {
+        headers: {
+          authorization: this._token
+        }
+      })
+      .then(this.checkResponse)
+  }
+
+  //Добавляем карточку на сервер
+  addCard({
+    name,
+    link
+  }) {
+    return fetch(`${this._url}${this._cohortId}/cards`, {
+        method: 'POST',
+        headers: {
+          authorization: this._token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          link
+        })
+      })
+      .then(this.checkResponse)
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this._url}${this._cohortId}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token
+      }
+    })
+    .then(this.checkResponse);
+  }
+
   //Получаем данные пользователя с сервера
   getUserInfo() {
     return fetch(`${this._url}${this._cohortId}/users/me`, {
@@ -12,18 +60,11 @@ export default class Api {
           authorization: this._token
         }
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(this.checkResponse);
   }
 
   //Отправляем данные пользователя на сервер
   setUserInfo(userData) {
-    console.log(userData);
     return fetch(`${this._url}${this._cohortId}/users/me`, {
         method: 'PATCH',
         headers: {
@@ -32,13 +73,20 @@ export default class Api {
         },
         body: JSON.stringify(userData)
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
+      .then(this.checkResponse)
+  }
+
+  //Обновляем аватар пользователя
+  updataAvatar(avatar) {
+    return fetch(`${this._url}${this._cohortId}/users/me/avatar`, {
+        method: 'PATCH',
+        headers: {
+          authorization: this._token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(avatar)
       })
+      .then(this.checkResponse)
   }
 
 }
