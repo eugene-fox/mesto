@@ -43,14 +43,48 @@ export default class Api {
       .then(this.checkResponse)
   }
 
-  deleteCard(gitcardId) {
+  //Метод удаления карточки
+  deleteCard(cardId) {
     return fetch(`${this._url}${this._cohortId}/cards/${cardId}`, {
+        method: 'DELETE',
+        headers: {
+          authorization: this._token
+        }
+      })
+      .then(this.checkResponse);
+  }
+
+  //Обновляем лайки на карточке
+  // updateLikes(cardId, isLike) {
+  //   return fetch(`${this._url}${this._cohortId}/cards/likes/${cardId}`, {
+  //     method: isLike ? 'PUT' : 'DELETE',
+  //     headers: {
+  //       authorization: this._token,
+  //       'Content-Type': 'application/json'
+  //     }
+  //   }).then(this.checkResponse)
+  // }
+
+  //Добавдяем лайк на карточку на сервере
+  addLike(cardId) {
+    return fetch(`${this._url}${this._cohortId}/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      }
+    }).then(this.checkResponse)
+  }
+
+  //Удаляем лайк с карточки на сервере
+  removeLike(cardId) {
+    return fetch(`${this._url}${this._cohortId}/cards/likes/${cardId}`, {
       method: 'DELETE',
       headers: {
-        authorization: this._token
+        authorization: this._token,
+        'Content-Type': 'application/json'
       }
-    })
-    .then(this.checkResponse);
+    }).then(this.checkResponse)
   }
 
   //Получаем данные пользователя с сервера
@@ -88,5 +122,4 @@ export default class Api {
       })
       .then(this.checkResponse)
   }
-
 }

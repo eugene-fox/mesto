@@ -1,15 +1,25 @@
 export default class Card {
-  constructor(cardData, cardTemplate, handleCardClick, userId, handleCardDeleteClick, confirmDeletePopup) {
+  constructor(cardData, cardTemplate, handleCardClick, userId, handleCardDeleteClick, confirmDeletePopup, {
+    handleLikeAdd,
+    handleLikeRemove
+  }) {
     this._name = cardData.name;
     this._link = cardData.link;
-    this._cardId = cardData.cardId;
-    this._cardCreatorId = cardData.cardCreatorId;
+    this._cardId = cardData._id;
+    this._cardCreatorId = cardData.owner._id;
+    this._cardLikes = cardData.likes;
     this._cardTemplate = cardTemplate;
+
     this._handleCardClick = handleCardClick;
     this._handleCardDeleteClick = handleCardDeleteClick;
+
+    this._handleLikeAdd = handleLikeAdd;
+    this._handleLikeRemove = handleLikeRemove;
+
+    // this._handeleLikeClick = handleLikeClick;
+
     this._deleteCard = this._deleteCard.bind(this);
     this._userId = userId;
-    this._cardId = cardData.cardId;
 
     this._confirmDeletePopup = confirmDeletePopup;
   }
@@ -31,9 +41,54 @@ export default class Card {
       });
     }
 
-    this._element.querySelector('.place-card__like-button').addEventListener('click', this._toggleLike);
+    this._likeButton.addEventListener('click', () => {
+      console.log('click');
+
+      if (this._likeButton.classList.contains('place-card__like-button_active')) {
+        // console.log(this._likeButton.classList);
+        this._handleLikeRemove(this._cardId);
+      } else {
+        // console.log(this._likeButton.classList);
+        this._handleLikeAdd(this._cardId);
+      }
+    });
+
     this._elementImage.addEventListener('click', () => {
-      this._handleCardClick(this._name, this._link)
+      this._handleCardClick(this._name, this._link);
+    });
+  }
+
+  //на вход массив с пользователями, которые поставили лайк
+  updateLikes(likesData) {
+
+    if (this._name === 'Camel-3')
+    {
+      console.log(this._cardLikes, this._name);
+    }
+
+
+    this._cardLikes = likesData;
+    this._likeCounter.textContent = this._cardLikes.length;
+
+    this._isLiked();
+  }
+
+  //Функция первоначальной проверки лайков
+  _isLiked() {
+
+    this._likeCounter.textContent = this._cardLikes.length;
+
+    if (this._cardLikes.length === 0) {
+      this._likeButton.classList.remove('place-card__like-button_active');
+    }
+
+    this._cardLikes.forEach((likers) => {
+      if (likers._id == this._userId) {
+        this._likeButton.classList.add('place-card__like-button_active');
+      } else {
+        this._likeButton.classList.remove('place-card__like-button_active');
+      }
+
     });
   }
 
@@ -41,11 +96,6 @@ export default class Card {
   _deleteCard(event) {
     event.target.closest('.place-card').remove();
     this._element = null;
-  }
-
-  //Метод активации/деактивации лайка
-  _toggleLike(event) {
-    event.target.classList.toggle('place-card__like-button_active');
   }
 
   //Метод создания карточки
@@ -57,16 +107,30 @@ export default class Card {
     this._elementImage.src = this._link;
     this._elementImage.alt = `Изображение на котором изображено место ${this._name}`;
 
+    this._likeButton = this._element.querySelector('.place-card__like-button');
+    this._likeCounter = this._element.querySelector('.place-card__like-count');
+
     const deleteButton = this._element.querySelector('.place-card__delete-button');
-    let cardIsMy = true;
+
+    let cardIsMy = null;
     //Сравниваем айдишники пользователя и создателя, если отличаются не отображаем кнопку удаления
     if (this._cardCreatorId != this._userId) {
-      console.log('скрываю кнопку\n', this._cardCreatorId, '\n', this._userId, this._cardId);
       deleteButton.classList.add('place-card__delete-button_hidden');
       cardIsMy = false;
+    } else {
+      cardIsMy = true;
+    }
+
+    if (cardIsMy) {
+      console.log(`Моя карточка с id: ${this._cardId}`);
     }
 
     this._setEventListeners(cardIsMy);
+
+    // this.updateLikes(this._cardLikes);
+
+    this._isLiked();
+
     return this._element;
   }
 }

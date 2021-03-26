@@ -117,26 +117,38 @@ export function handleImageCardClick(name, link) {
   imagePopup.openPopup(name, link);
 }
 
-export function handleCardDeleteClick(cardId){
+export function handleCardDeleteClick(cardId) {
   api.deleteCard(cardId).then(() => console.log('Карточка удалилась)'));
 }
 
 //Функция создает и возвращает готовую карточку с использованием метода класса Card
 function cardCreate(cardData) {
-  const cardItem = new Card(cardData, templateElement, handleImageCardClick, currentUserId, handleCardDeleteClick, cardDeleteConfirmPopup);
+  const cardItem = new Card(cardData, templateElement, handleImageCardClick, currentUserId, handleCardDeleteClick, cardDeleteConfirmPopup, {
+    handleLikeAdd: (cardId) => {
+      api.addLike(cardId)
+        .then(res => {
+          cardItem.updateLikes(res.likes);
+        })
+        .then(() => console.log('Добавление лайка прошло успешно'))
+        .catch(err => console.log(err));
+    },
+    handleLikeRemove: (cardId) => {
+      api.removeLike(cardId)
+        .then(res => {
+          cardItem.updateLikes(res.likes);
+        })
+        .then(() => console.log('Удаление лайка прошло успешно'))
+        .catch(err => console.log(err));
+    }
+  });
   return cardItem.composeCard();
 }
 
-//Реализуем отрисовку начальных карточек
-const initialCardsRender = new Section({
+//Реализуем отрисовку карточек
+const cardRender = new Section({
     renderer: (cardData) => {
-      const newCardItem = cardCreate({
-        name: cardData.name,
-        link: cardData.link,
-        cardCreatorId: cardData.owner._id,
-        cardId: cardData._id
-      });
-      initialCardsRender.addItem(newCardItem);
+      const newCardItem = cardCreate(cardData);
+      cardRender.addItem(newCardItem);
     }
   },
   cardsContainerElement
@@ -145,19 +157,14 @@ const initialCardsRender = new Section({
 //Создаем поп-ап с добавлением карточки
 const addImageCardPopup = new PopupWithForm('addCard', () => {
   api.addCard({
-    name: placeName.value,
-    link: placeImageUrl.value
-  })
-  .then((cardData) => {
-    const newCardItem = cardCreate({
-      name: cardData.name,
-      link: cardData.link,
-      cardCreatorId: cardData.owner._id,
-      cardId: cardData._id
+      name: placeName.value,
+      link: placeImageUrl.value
+    })
+    .then((cardData) => {
+      const newCardItem = cardCreate(cardData);
+      cardRender.addItem(newCardItem);
+      imageCardFormValidator.resetValidation();
     });
-    initialCardsRender.addItem(newCardItem);
-    imageCardFormValidator.resetValidation();
-  });
 });
 
 addImageCardPopup.setEventListeners();
@@ -175,7 +182,8 @@ addButton.addEventListener('click', () => {
 Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userData, cardData]) => {
 
-    currentUserId = userData._id
+    //Записываем текущего пользователя
+    currentUserId = userData._id;
 
     userInformation.setUserInfo({
       newProfileName: userData.name,
@@ -183,5 +191,5 @@ Promise.all([api.getUserInfo(), api.getCards()])
       newProfilePicture: userData.avatar
     });
 
-    initialCardsRender.renderItems(cardData);
+    cardRender.renderItems(cardData);
   }).catch(err => console.log(err));
