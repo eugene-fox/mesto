@@ -1,12 +1,4 @@
 export default class UserInfo {
-  // constructor(profileName, profileDescription, profilePicture, newProfileName, newProfileDescription) {
-  //   this._profileName = document.querySelector(profileName);
-  //   this._profileDescription = document.querySelector(profileDescription);
-  //   this._profilePicture = document.querySelector(profilePicture);
-  //   this._newProfileName = newProfileName;
-  //   this._newProfileDescription = newProfileDescription;
-  // }
-
   constructor(profileName, profileDescription, profilePicture) {
     this._profileName = document.querySelector(profileName);
     this._profileDescription = document.querySelector(profileDescription);
@@ -22,12 +14,6 @@ export default class UserInfo {
     }
     return userInfo;
   }
-
-  //старая версия
-  // setUserInfo() {
-  //   this._profileName.textContent = this._newProfileName.value;
-  //   this._profileDescription.textContent = this._newProfileDescription.value;
-  // }
 
   //На вход объект с информацией о пользователе
   setUserInfo({newProfileName, newProfileDescription, newProfilePicture}) {

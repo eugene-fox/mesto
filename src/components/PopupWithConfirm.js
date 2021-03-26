@@ -19,11 +19,4 @@ export default class PopupWithConfirm extends PopupWithForm {
   setSubmitHandler(submitHandler){
     this._formSubmitHandler = submitHandler;
   }
-
-  openPopup()
-  {
-    super.openPopup();
-    // this._cardId = cardId;
-    // this._targetCard = evt;
-  }
 }

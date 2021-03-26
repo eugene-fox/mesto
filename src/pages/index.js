@@ -113,11 +113,7 @@ const imagePopup = new PopupWithImage('fullSizeImage');
 imagePopup.setEventListeners();
 
 //Создаем поп-ап подтверждения удаления карточки
-const confirmDeletePopup = new PopupWithConfirm('deleteConfirm', (cardId) => {
-
-
-
-});
+const confirmDeletePopup = new PopupWithConfirm('deleteConfirm', () => {});
 
 confirmDeletePopup.setEventListeners();
 
@@ -129,9 +125,6 @@ export function handleImageCardClick(name, link) {
 function cardCreate(cardData) {
   const cardItem = new Card(cardData, templateElement, handleImageCardClick, currentUserId, confirmDeletePopup, {
     handleCardDeleteClick: (cardId, event) => {
-
-      console.log('Тут по идее карточка удвлилась!!');
-
       confirmDeletePopup.setSubmitHandler(() => {
         confirmDeletePopup.showLoad(true);
         api.deleteCard(cardId)
@@ -147,19 +140,13 @@ function cardCreate(cardData) {
       })
 
       confirmDeletePopup.openPopup();
-
-
-
-      // confirmDeletePopup.openPopup(cardId, evt);
-      // cardItem.deleteCard();
-      // api.deleteCard(cardId).then(() => console.log('Карточка удалилась)'));
     },
     handleLikeAdd: (cardId) => {
       api.addLike(cardId)
         .then(res => {
           cardItem.updateLikes(res.likes);
         })
-        .then(() => console.log('Добавление лайка прошло успешно'))
+        // .then(() => console.log('Добавление лайка прошло успешно'))
         .catch(err => console.log(err));
     },
     handleLikeRemove: (cardId) => {
@@ -167,7 +154,7 @@ function cardCreate(cardData) {
         .then(res => {
           cardItem.updateLikes(res.likes);
         })
-        .then(() => console.log('Удаление лайка прошло успешно'))
+        // .then(() => console.log('Удаление лайка прошло успешно'))
         .catch(err => console.log(err));
     }
   });
