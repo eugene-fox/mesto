@@ -1,7 +1,8 @@
 export default class Card {
-  constructor(cardData, cardTemplate, handleCardClick, userId, handleCardDeleteClick, confirmDeletePopup, {
+  constructor(cardData, cardTemplate, handleCardClick, userId, confirmDeletePopup, {
+    handleCardDeleteClick,
     handleLikeAdd,
-    handleLikeRemove
+    handleLikeRemove,
   }) {
     this._name = cardData.name;
     this._link = cardData.link;
@@ -18,7 +19,7 @@ export default class Card {
 
     // this._handeleLikeClick = handleLikeClick;
 
-    this._deleteCard = this._deleteCard.bind(this);
+    // this._deleteCard = this._deleteCard.bind(this);
     this._userId = userId;
 
     this._confirmDeletePopup = confirmDeletePopup;
@@ -34,10 +35,13 @@ export default class Card {
 
     //Если карточка не пользователя, тогда слушатель не вешаем
     if (cardIsMy) {
-      this._element.querySelector('.place-card__delete-button').addEventListener('click', (evt) => {
-        this._confirmDeletePopup.openPopup();
-        this._handleCardDeleteClick(this._cardId);
-        this._deleteCard(evt);
+      this._element.querySelector('.place-card__delete-button').addEventListener('click', (event) => {
+        // this._confirmDeletePopup.openPopup(this._cardId);
+        console.log('Пришли в кард, открыли поп ап');
+        this._handleCardDeleteClick(this._cardId, event);
+        // this._confirmDeletePopup
+        // this._confirmDeletePopup.
+        // this._deleteCard(evt);
       });
     }
 
@@ -45,10 +49,8 @@ export default class Card {
       console.log('click');
 
       if (this._likeButton.classList.contains('place-card__like-button_active')) {
-        // console.log(this._likeButton.classList);
         this._handleLikeRemove(this._cardId);
       } else {
-        // console.log(this._likeButton.classList);
         this._handleLikeAdd(this._cardId);
       }
     });
@@ -61,11 +63,9 @@ export default class Card {
   //на вход массив с пользователями, которые поставили лайк
   updateLikes(likesData) {
 
-    if (this._name === 'Camel-3')
-    {
+    if (this._name === 'Camel-3') {
       console.log(this._cardLikes, this._name);
     }
-
 
     this._cardLikes = likesData;
     this._likeCounter.textContent = this._cardLikes.length;
@@ -83,19 +83,13 @@ export default class Card {
     }
 
     this._cardLikes.forEach((likers) => {
-      if (likers._id == this._userId) {
+      if (likers._id === this._userId) {
         this._likeButton.classList.add('place-card__like-button_active');
       } else {
         this._likeButton.classList.remove('place-card__like-button_active');
       }
 
     });
-  }
-
-  //Метод удаление карточки
-  _deleteCard(event) {
-    event.target.closest('.place-card').remove();
-    this._element = null;
   }
 
   //Метод создания карточки
@@ -114,7 +108,7 @@ export default class Card {
 
     let cardIsMy = null;
     //Сравниваем айдишники пользователя и создателя, если отличаются не отображаем кнопку удаления
-    if (this._cardCreatorId != this._userId) {
+    if (this._cardCreatorId !== this._userId) {
       deleteButton.classList.add('place-card__delete-button_hidden');
       cardIsMy = false;
     } else {
@@ -133,4 +127,24 @@ export default class Card {
 
     return this._element;
   }
+
+
+  // Метод удаление карточки
+  deleteCard(event) {
+    event.target.closest('.place-card').remove();
+    this._element = null;
+  }
+
+  // deleteCard() {
+  //   this._element.remove();
+  //   this._element = null;
+  // }
+
+  //Метод удаление карточки
+  // deleteCard() {
+  //   console.log('Удалить из разметки');
+  //   console.log(this._element);
+  //   // this._element.remove();
+  //   // this._element = null;
+  // }
 }

@@ -4,6 +4,7 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
@@ -108,22 +109,45 @@ const imagePopup = new PopupWithImage('fullSizeImage');
 imagePopup.setEventListeners();
 
 //Создаем поп-ап подтверждения удаления карточки
-const cardDeleteConfirmPopup = new PopupWithForm('deleteConfirm', () => {
+const confirmDeletePopup = new PopupWithConfirm('deleteConfirm', (cardId) => {
 
-})
-cardDeleteConfirmPopup.setEventListeners();
+
+
+});
+
+confirmDeletePopup.setEventListeners();
 
 export function handleImageCardClick(name, link) {
   imagePopup.openPopup(name, link);
 }
 
-export function handleCardDeleteClick(cardId) {
-  api.deleteCard(cardId).then(() => console.log('Карточка удалилась)'));
-}
-
 //Функция создает и возвращает готовую карточку с использованием метода класса Card
 function cardCreate(cardData) {
-  const cardItem = new Card(cardData, templateElement, handleImageCardClick, currentUserId, handleCardDeleteClick, cardDeleteConfirmPopup, {
+  const cardItem = new Card(cardData, templateElement, handleImageCardClick, currentUserId, confirmDeletePopup, {
+    handleCardDeleteClick: (cardId, event) => {
+
+      console.log('Тут по идее карточка удвлилась!!');
+
+      confirmDeletePopup.setSubmitHandler(() => {
+        api.deleteCard(cardId)
+          .then(() => {
+            cardItem.deleteCard(event);
+            confirmDeletePopup.closePopup();
+          })
+          .then(() => console.log('Карточка успешно удалена'))
+          .catch((err) => {
+            console.log(err);
+          })
+      })
+
+      confirmDeletePopup.openPopup();
+
+
+
+      // confirmDeletePopup.openPopup(cardId, evt);
+      // cardItem.deleteCard();
+      // api.deleteCard(cardId).then(() => console.log('Карточка удалилась)'));
+    },
     handleLikeAdd: (cardId) => {
       api.addLike(cardId)
         .then(res => {
