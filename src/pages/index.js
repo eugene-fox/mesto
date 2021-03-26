@@ -57,6 +57,7 @@ const userInformation = new UserInfo(profileName, profileDescription, profilePic
 
 //Создаем поп-ап редактирования профиля
 const profileEditPopup = new PopupWithForm('profileEdit', () => {
+  profileEditPopup.showLoad(true);
   api.setUserInfo({
       name: nameInput.value,
       about: jobInput.value
@@ -65,7 +66,8 @@ const profileEditPopup = new PopupWithForm('profileEdit', () => {
       newProfileName: data.name,
       newProfileDescription: data.about
     }))
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
+    .finally(() => profileEditPopup.showLoad(false));
 });
 
 profileEditPopup.setEventListeners();
@@ -82,6 +84,7 @@ editButton.addEventListener("click", () => {
 //Создаем поп-ап формы обновления аватара
 const profileAvatarEditPopup = new PopupWithForm('updateAvatar', () => {
   console.log(avatarUrlInput.value);
+  profileAvatarEditPopup.showLoad(true)
   api.updataAvatar({
       avatar: avatarUrlInput.value
     })
@@ -90,7 +93,8 @@ const profileAvatarEditPopup = new PopupWithForm('updateAvatar', () => {
         newProfilePicture: data.avatar,
       })
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
+    .finally(() => profileAvatarEditPopup.showLoad(false));
 });
 
 profileAvatarEditPopup.setEventListeners();
@@ -129,6 +133,7 @@ function cardCreate(cardData) {
       console.log('Тут по идее карточка удвлилась!!');
 
       confirmDeletePopup.setSubmitHandler(() => {
+        confirmDeletePopup.showLoad(true);
         api.deleteCard(cardId)
           .then(() => {
             cardItem.deleteCard(event);
@@ -138,6 +143,7 @@ function cardCreate(cardData) {
           .catch((err) => {
             console.log(err);
           })
+          .finally(() => confirmDeletePopup.showLoad(false));
       })
 
       confirmDeletePopup.openPopup();
@@ -180,6 +186,7 @@ const cardRender = new Section({
 
 //Создаем поп-ап с добавлением карточки
 const addImageCardPopup = new PopupWithForm('addCard', () => {
+  addImageCardPopup.showLoad(true);
   api.addCard({
       name: placeName.value,
       link: placeImageUrl.value
@@ -188,7 +195,8 @@ const addImageCardPopup = new PopupWithForm('addCard', () => {
       const newCardItem = cardCreate(cardData);
       cardRender.addItem(newCardItem);
       imageCardFormValidator.resetValidation();
-    });
+    })
+    .finally(() => addImageCardPopup.showLoad(false));
 });
 
 addImageCardPopup.setEventListeners();
