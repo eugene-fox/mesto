@@ -7,7 +7,7 @@ export default class PopupWithForm extends Popup {
     this._formElement = this._popup.querySelector('.popup__container');
     this._inputList = Array.from(this._formElement.querySelectorAll('.popup__input'));
     this._submitButton = this._formElement.querySelector('.popup__save-button');
-    this.__submitButtonCaption = this._submitButton.textContent;
+    this._submitButtonInitialCaption = this._submitButton.textContent;
   }
 
   closePopup() {
@@ -33,12 +33,12 @@ export default class PopupWithForm extends Popup {
     });
   }
 
-  showSaveState(isSaving) {
-    if (isSaving) {
-      this._submitButton.textContent = 'Сохранение...';
+  showLoad(isLoad) {
+    const showLoadMassage = 'Cохранение...'
+    if (isLoad) {
+      this._submitButton.textContent = showLoadMassage;
     } else {
-      this._submitButton.textContent = this.__submitButtonCaption;
+      this._submitButton.textContent = this._submitButtonInitialCaption;
     }
   }
-
 }

@@ -1,19 +1,25 @@
 export default class Card {
-  constructor(cardData, cardTemplate, handleCardClick, deleteHandler, addlike, removeLike) {
+  constructor(cardData, cardTemplate, handleCardClick, userId, confirmDeletePopup, {
+    handleCardDeleteClick,
+    handleLikeAdd,
+    handleLikeRemove,
+  }) {
     this._name = cardData.name;
     this._link = cardData.link;
+    this._cardId = cardData._id;
+    this._cardCreatorId = cardData.owner._id;
+    this._cardLikes = cardData.likes;
     this._cardTemplate = cardTemplate;
+
     this._handleCardClick = handleCardClick;
-    this._likes = cardData.likes;
+    this._handleCardDeleteClick = handleCardDeleteClick;
 
-    //this._ownerId = owner._id;
-    //this._imageId = _id;
+    this._handleLikeAdd = handleLikeAdd;
+    this._handleLikeRemove = handleLikeRemove;
 
-    //this._userId = userId;
-    //this._deleteHandler = deleteHandler
-    //this._addlike = addlike;
-    //this._removeLike = removeLike;
-    //this._toggleLikeButton = this._toggleLikeButton.bind(this);
+    this._userId = userId;
+
+    this._confirmDeletePopup = confirmDeletePopup;
   }
 
   //Получаем разметку карточки
@@ -22,28 +28,50 @@ export default class Card {
   }
 
   //Вешаем слушателей событий
-  _setEventListeners() {
-    this._element.querySelector('.place-card__delete-button').addEventListener('click', this._deleteCard);
-    this._element.querySelector('.place-card__like-button').addEventListener('click', this._toggleLike);
+  _setEventListeners(cardIsMy) {
+
+    //Если карточка не пользователя, тогда слушатель не вешаем
+    if (cardIsMy) {
+      this._element.querySelector('.place-card__delete-button').addEventListener('click', (event) => {
+        console.log('Пришли в кард, открыли поп ап');
+        this._handleCardDeleteClick(this._cardId, event);
+      });
+    }
+
+    this._likeButton.addEventListener('click', () => {
+      if (this._likeButton.classList.contains('place-card__like-button_active')) {
+        this._handleLikeRemove(this._cardId);
+      } else {
+        this._handleLikeAdd(this._cardId);
+      }
+    });
+
     this._elementImage.addEventListener('click', () => {
-      this._handleCardClick(this._name, this._link)
+      this._handleCardClick(this._name, this._link);
     });
   }
 
-  //Метод удаление карточки
-  _deleteCard(event) {
-    event.target.closest('.place-card').remove();
-    this._element = null;
+  //на вход массив с пользователями, которые поставили лайк
+  updateLikes(likesData) {
+    this._cardLikes = likesData;
+    this._likeCounter.textContent = this._cardLikes.length;
+    this._isLiked();
   }
 
-  //Метод активации/деактивации лайка
-  _toggleLike(event) {
-    event.target.classList.toggle('place-card__like-button_active');
-  }
+  //Функция первоначальной проверки лайков
+  _isLiked() {
+    this._likeCounter.textContent = this._cardLikes.length;
+    if (this._cardLikes.length === 0) {
+      this._likeButton.classList.remove('place-card__like-button_active');
+    }
 
-  //Метод изменяет количество лайков у карточки
-  changeLikeCount(count) {
-    this._likeCounter.textContent = count;
+    this._cardLikes.forEach((likers) => {
+      if (likers._id === this._userId) {
+        this._likeButton.classList.add('place-card__like-button_active');
+      } else {
+        this._likeButton.classList.remove('place-card__like-button_active');
+      }
+    });
   }
 
   //Метод создания карточки
@@ -54,9 +82,29 @@ export default class Card {
     this._elementTitle.textContent = this._name;
     this._elementImage.src = this._link;
     this._elementImage.alt = `Изображение на котором изображено место ${this._name}`;
-    this._likeCounter = this._element.querySelector('.place-card__like-counter');
-    this.changeLikeCount(this._likes.length);
-    this._setEventListeners();
+
+    this._likeButton = this._element.querySelector('.place-card__like-button');
+    this._likeCounter = this._element.querySelector('.place-card__like-count');
+
+    const deleteButton = this._element.querySelector('.place-card__delete-button');
+
+    let cardIsMy = null;
+    //Сравниваем айдишники пользователя и создателя, если отличаются не отображаем кнопку удаления
+    if (this._cardCreatorId !== this._userId) {
+      deleteButton.classList.add('place-card__delete-button_hidden');
+      cardIsMy = false;
+    } else {
+      cardIsMy = true;
+    }
+
+    this._setEventListeners(cardIsMy);
+    this._isLiked();
     return this._element;
+  }
+
+  // Метод удаление карточки
+  deleteCard(event) {
+    event.target.closest('.place-card').remove();
+    this._element = null;
   }
 }

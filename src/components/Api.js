@@ -1,105 +1,114 @@
 export default class Api {
-  constructor(config) {
-    this._url = config.url;
-    this._headers = config.headers;
+  constructor(token, url, cohortId) {
+    this._token = token;
+    this._url = url;
+    this._cohortId = cohortId;
   }
 
-  _onError(res) {
+  //проверяем ответ сервера
+  checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
+    // если ошибка, отклоняем промис
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  //Промис выполнится тогда, когда выполнятся оба переданных аргумента, иначе будет отклонен
-  getInitialData() {
-    return Promise.all([this.getUserInfo(), this.getInitialCards()]);
+  //Получаем карточки с сервера
+  getCards() {
+    return fetch(`${this._url}${this._cohortId}/cards`, {
+        headers: {
+          authorization: this._token
+        }
+      })
+      .then(this.checkResponse)
   }
 
-  //Получаем данные о пользователе с сервера
+  //Добавляем карточку на сервер
+  addCard({
+    name,
+    link
+  }) {
+    return fetch(`${this._url}${this._cohortId}/cards`, {
+        method: 'POST',
+        headers: {
+          authorization: this._token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          link
+        })
+      })
+      .then(this.checkResponse)
+  }
+
+  //Метод удаления карточки
+  deleteCard(cardId) {
+    return fetch(`${this._url}${this._cohortId}/cards/${cardId}`, {
+        method: 'DELETE',
+        headers: {
+          authorization: this._token
+        }
+      })
+      .then(this.checkResponse);
+  }
+
+  //Добавдяем лайк на карточку на сервере
+  addLike(cardId) {
+    return fetch(`${this._url}${this._cohortId}/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      }
+    }).then(this.checkResponse)
+  }
+
+  //Удаляем лайк с карточки на сервере
+  removeLike(cardId) {
+    return fetch(`${this._url}${this._cohortId}/cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      }
+    }).then(this.checkResponse)
+  }
+
+  //Получаем данные пользователя с сервера
   getUserInfo() {
-    return fetch(`${this._url}users/me`, {
-        method: 'GET',
-        headers: this._headers
+    return fetch(`${this._url}${this._cohortId}/users/me`, {
+        headers: {
+          authorization: this._token
+        }
       })
-      .then(this._onError)
-      .catch(err => console.log(err))
+      .then(this.checkResponse);
   }
 
-
-  //Загружаем на сервер обновленную информацию
-  updateUserInfo(data) {
-    return fetch(`${this._url}users/me`, {
+  //Отправляем данные пользователя на сервер
+  setUserInfo(userData) {
+    return fetch(`${this._url}${this._cohortId}/users/me`, {
         method: 'PATCH',
-        headers: this._headers,
-        body: JSON.stringify({
-          name: data.name,
-          about: data.description
-        })
+        headers: {
+          authorization: this._token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
       })
-      .then(this._onError)
-      .catch(err => console.log(err))
+      .then(this.checkResponse)
   }
 
-  //Устанавливаем пользователю аватар
-  setUserAvatar(data) {
-    return fetch(`${this._url}users/me/avatar`, {
+  //Обновляем аватар пользователя
+  updataAvatar(avatar) {
+    return fetch(`${this._url}${this._cohortId}/users/me/avatar`, {
         method: 'PATCH',
-        headers: this._headers,
-        body: JSON.stringify({
-          avatar: data.url
-        })
+        headers: {
+          authorization: this._token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(avatar)
       })
-      .then(this._onError)
-      .catch(err => console.log(err))
+      .then(this.checkResponse)
   }
-
-  getInitialCards() {
-    return fetch(`${this._url}cards/`, {
-        method: "GET",
-        headers: this._headers
-      })
-      .then(this._onError)
-      .catch(err => console.log(err))
-  }
-
-  deleteCard(data) {
-    return fetch(`${this._url}cards/${data}`, {
-        method: "DELETE",
-        headers: this.headers,
-      }).then(this._onError)
-      .catch(err => console.log(err));
-  }
-
-  setLikes() {
-    return fetch(`${this._url}cards/likes/${cardId}`, {
-        method: "PUT",
-        headers: this.headers,
-      }).then(this._onError)
-      .catch(err => console.log(err));
-  }
-
-  removeLike() {
-    return fetch(`${this._url}cards/likes/${cardId}`, {
-        method: "DELETE",
-        headers: this.headers,
-      }).then(this._onError)
-      .catch(err => console.log(err));
-  }
-
-  uploadCard(data){
-    console.log(data);
-    return fetch(`${this._url}cards`, {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify({
-        name: data.place,
-        link: data.url
-      })
-    })
-    .then(this._checkResult)
-    .catch(err => console.log(err))
-  }
-
-
 }

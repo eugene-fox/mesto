@@ -20,7 +20,7 @@
 }
 
 .popup__input:last-child {
-  margin-bottom: 48px;
+  margin-bottom: 0px;
 }
 
 @media screen and (max-width: 320px) {

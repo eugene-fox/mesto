@@ -17,11 +17,15 @@
 
     <section class="profile">
       <div class="profile__information">
-        <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Фотография Жака-Ива Кусто">
+        <div class="profile__avatar">
+          <img class="profile__avatar-picture" src="<%=require('./images/avatar.jpg')%>"
+            alt="Фотография Жака-Ива Кусто">
+          <button type="button" aria-label="Изменить изображение профиля" class="profile__avatar-edit"></button>
+        </div>
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <p class="profile__description">Исследователь океана</p>
-        <button type="button" class="profile__edit-button"></button>
-        <button type="button" aria-label="Лайк" class="profile__add-button"></button>
+        <button type="button" aria-label="Редактировать информацию профиля" class="profile__edit-button"></button>
+        <button type="button" aria-label="Добавить новую карточку" class="profile__add-button"></button>
       </div>
     </section>
 
@@ -67,6 +71,27 @@
     </form>
   </section>
 
+  <section class="popup" id="deleteConfirm">
+    <form name="delete-confirm" class="popup__container popup__container_deleteConfirm" novalidate>
+      <h3 class="popup__title">Вы уверены?</h3>
+      <button type="submit" class="popup__save-button popup__save-button_card">Да</button>
+      <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
+    </form>
+  </section>
+
+  <section class="popup" id="updateAvatar">
+    <form name="delete-confirm" class="popup__container popup__container_avatar-edit" novalidate>
+      <h3 class="popup__title">Обновить аватар</h3>
+      <div class="popup__inputs">
+        <input type="url" name="avatar-url" class="popup__input popup__input_type_avatar-url" value=""
+          autocomplete="off" placeholder="url" required minlength="2" maxlength="">
+        <span class="popup__error-message" id="avatar-url-error"></span>
+      </div>
+      <button type="submit" class="popup__save-button popup__save-button_card">Сохранить</button>
+      <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
+    </form>
+  </section>
+
   <section class="popup" id="fullSizeImage">
     <div class="popup__image-container">
       <figure class="popup__image-group">
@@ -87,14 +112,14 @@
 
   <template class="card-template">
     <li class="place-card">
-      <button type="button" aria-label="Удалить" class="place-card__delete-button"></button>
+      <button type="button" aria-label="Удалить карточку" class="place-card__delete-button"></button>
       <img class="place-card__photo" src="<%=require('./images/places-card-photo-min01.jpg')%>"
         alt="Шаблонное изображение">
       <div class="place-card__photo-description">
         <h2 class="place-card__photo-name"></h2>
-        <div class="place-card__like-button-container">
-          <button type="button" aria-label="Лайк" class="place-card__like-button"></button>
-          <span class="place-card__like-counter">0</span>
+        <div class="place-card__like-section">
+          <button type="button" aria-label="Поставить лайк" class="place-card__like-button"></button>
+          <span class="place-card__like-count">0</span>
         </div>
       </div>
     </li>
