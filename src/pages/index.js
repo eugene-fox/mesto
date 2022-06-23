@@ -38,7 +38,6 @@ const avatarUrlInput = document.querySelector('.popup__input_type_avatar-url')
 
 const placeName = document.querySelector('.popup__input_type_place-name');
 const placeImageUrl = document.querySelector('.popup__input_type_image-link');
-
 //=================================================================================
 
 const api = new Api('233fa192-0365-43b1-9635-9ca57a07d48d', 'https://mesto.nomoreparties.co/v1/', 'cohort-20');

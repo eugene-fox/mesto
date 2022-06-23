@@ -1,0 +1,6 @@
+.place-card__like-button-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
